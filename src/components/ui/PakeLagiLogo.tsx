@@ -7,7 +7,7 @@ interface PakeLagiLogoProps {
 
 export function PakeLagiLogo({
   className = "",
-  color = "#1E3447",
+  color = "currentColor",
   variant = "full",
   height = 42,
 }: PakeLagiLogoProps) {

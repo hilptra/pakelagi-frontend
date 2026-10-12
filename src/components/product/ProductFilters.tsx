@@ -82,7 +82,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
   return (
     <div className="space-y-6">
       {/* Top Bar: Search + Filter Toggle + Sort */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-xl border border-zinc-200 shadow-xs">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-surface p-3 sm:p-4 rounded-xl border border-brand-border shadow-xs">
         
         {/* Search input */}
         <form onSubmit={handleSearchSubmit} className="relative flex-1">
@@ -91,16 +91,16 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
             placeholder="Cari judul, brand, atau warna..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-zinc-50 text-zinc-900 text-xs sm:text-sm rounded-lg pl-9 pr-4 py-2 border border-zinc-200 focus:border-zinc-400 focus:bg-white focus:outline-none"
+            className="w-full bg-background text-foreground text-xs sm:text-sm rounded-lg pl-9 pr-4 py-2 border border-brand-border focus:border-brand-primary focus:bg-surface focus:outline-none"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
         </form>
 
         <div className="flex items-center gap-2">
           {/* Mobile filter toggle */}
           <button
             onClick={() => setShowMobileFilters(!showMobileFilters)}
-            className="lg:hidden flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-white border border-zinc-200 rounded-lg text-zinc-700 hover:bg-zinc-100 transition-colors"
+            className="lg:hidden flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-surface border border-brand-border rounded-lg text-foreground hover:bg-background transition-colors"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             <span>Filter {hasActiveFilters && "•"}</span>
@@ -108,11 +108,11 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
 
           {/* Sort Dropdown */}
           <div className="relative flex items-center">
-            <ArrowUpDown className="absolute left-3 pointer-events-none w-3.5 h-3.5 text-zinc-400" />
+            <ArrowUpDown className="absolute left-3 pointer-events-none w-3.5 h-3.5 text-brand-muted" />
             <select
               value={currentParams.sort || "newest"}
               onChange={(e) => updateFilters({ sort: e.target.value })}
-              className="bg-white text-zinc-900 text-xs rounded-lg pl-8 pr-8 py-2 border border-zinc-200 focus:border-zinc-400 focus:outline-none appearance-none cursor-pointer"
+              className="bg-surface text-foreground text-xs rounded-lg pl-8 pr-8 py-2 border border-brand-border focus:border-brand-primary focus:outline-none appearance-none cursor-pointer"
             >
               <option value="newest">Terbaru</option>
               <option value="price_asc">Harga: Termurah</option>
@@ -125,10 +125,10 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
       {/* Active Filter Tags */}
       {hasActiveFilters && (
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="text-zinc-400 font-mono text-[11px]">Active Filters:</span>
+          <span className="text-brand-muted font-mono text-[11px]">Active Filters:</span>
           
           {currentParams.q && (
-            <span className="inline-flex items-center gap-1 bg-zinc-200 text-zinc-800 px-2.5 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-surface text-foreground border border-brand-border px-2.5 py-1 rounded-full">
               Pencarian: &quot;{currentParams.q}&quot;
               <button onClick={() => updateFilters({ q: "" })} aria-label="Hapus filter kata kunci">
                 <X className="w-3 h-3 hover:text-red-600" />
@@ -137,7 +137,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
           )}
 
           {currentParams.category && (
-            <span className="inline-flex items-center gap-1 bg-zinc-200 text-zinc-800 px-2.5 py-1 rounded-full capitalize">
+            <span className="inline-flex items-center gap-1 bg-surface text-foreground border border-brand-border px-2.5 py-1 rounded-full capitalize">
               Kategori: {categories.find(c => c.slug === currentParams.category)?.name || currentParams.category}
               <button onClick={() => updateFilters({ category: "" })} aria-label="Hapus filter kategori">
                 <X className="w-3 h-3 hover:text-red-600" />
@@ -146,7 +146,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
           )}
 
           {currentParams.size && (
-            <span className="inline-flex items-center gap-1 bg-zinc-200 text-zinc-800 px-2.5 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-surface text-foreground border border-brand-border px-2.5 py-1 rounded-full">
               Ukuran: {currentParams.size}
               <button onClick={() => updateFilters({ size: "" })} aria-label="Hapus filter ukuran">
                 <X className="w-3 h-3 hover:text-red-600" />
@@ -155,7 +155,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
           )}
 
           {(currentParams.min_price || currentParams.max_price) && (
-            <span className="inline-flex items-center gap-1 bg-zinc-200 text-zinc-800 px-2.5 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-surface text-foreground border border-brand-border px-2.5 py-1 rounded-full">
               Harga: Rp{currentParams.min_price || 0} - Rp{currentParams.max_price || "∞"}
               <button onClick={() => updateFilters({ min_price: "", max_price: "" })} aria-label="Hapus filter harga">
                 <X className="w-3 h-3 hover:text-red-600" />
@@ -174,11 +174,11 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
 
       {/* Desktop Filter Panel / Drawer */}
       <div className={`${showMobileFilters ? "block" : "hidden"} lg:block space-y-6 pt-2`}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 sm:p-5 rounded-xl border border-zinc-200 bg-white shadow-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 sm:p-5 rounded-xl border border-brand-border bg-surface shadow-xs">
           
           {/* Categories */}
           <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-zinc-900 uppercase tracking-wider">
+            <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider">
               Kategori
             </h4>
             <div className="flex flex-wrap gap-1.5">
@@ -186,8 +186,8 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
                 onClick={() => updateFilters({ category: "" })}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                   !currentParams.category
-                    ? "bg-zinc-950 text-white"
-                    : "bg-zinc-100 text-zinc-600 hover:text-zinc-950"
+                    ? "bg-brand-primary text-white"
+                    : "bg-background text-brand-muted hover:text-brand-primary"
                 }`}
               >
                 Semua
@@ -198,8 +198,8 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
                   onClick={() => updateFilters({ category: cat.slug })}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                     currentParams.category === cat.slug
-                      ? "bg-zinc-950 text-white"
-                      : "bg-zinc-100 text-zinc-600 hover:text-zinc-950"
+                      ? "bg-brand-primary text-white"
+                      : "bg-background text-brand-muted hover:text-brand-primary"
                   }`}
                 >
                   {cat.name}
@@ -210,7 +210,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
 
           {/* Sizes */}
           <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-zinc-900 uppercase tracking-wider">
+            <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider">
               Ukuran
             </h4>
             <div className="flex flex-wrap gap-1.5">
@@ -218,8 +218,8 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
                 onClick={() => updateFilters({ size: "" })}
                 className={`px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
                   !currentParams.size
-                    ? "bg-zinc-950 text-white"
-                    : "bg-zinc-100 text-zinc-600 hover:text-zinc-950"
+                    ? "bg-brand-primary text-white"
+                    : "bg-background text-brand-muted hover:text-brand-primary"
                 }`}
               >
                 Semua
@@ -230,8 +230,8 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
                   onClick={() => updateFilters({ size })}
                   className={`px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
                     currentParams.size === size
-                      ? "bg-zinc-950 text-white"
-                      : "bg-zinc-100 text-zinc-600 hover:text-zinc-950"
+                      ? "bg-brand-primary text-white"
+                      : "bg-background text-brand-muted hover:text-brand-primary"
                   }`}
                 >
                   {size}
@@ -242,7 +242,7 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
 
           {/* Price Range */}
           <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-zinc-900 uppercase tracking-wider">
+            <h4 className="text-xs font-semibold text-foreground uppercase tracking-wider">
               Rentang Harga (Rp)
             </h4>
             <form onSubmit={handlePriceSubmit} className="flex items-center gap-2">
@@ -251,19 +251,19 @@ export function ProductFilters({ categories, currentParams }: ProductFiltersProp
                 placeholder="Min"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className="w-full bg-zinc-50 text-zinc-900 text-xs rounded-md px-2.5 py-1.5 border border-zinc-200"
+                className="w-full bg-background text-foreground text-xs rounded-md px-2.5 py-1.5 border border-brand-border"
               />
-              <span className="text-zinc-400 text-xs">-</span>
+              <span className="text-brand-muted text-xs">-</span>
               <input
                 type="number"
                 placeholder="Max"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-full bg-zinc-50 text-zinc-900 text-xs rounded-md px-2.5 py-1.5 border border-zinc-200"
+                className="w-full bg-background text-foreground text-xs rounded-md px-2.5 py-1.5 border border-brand-border"
               />
               <button
                 type="submit"
-                className="bg-zinc-950 text-white text-xs px-3.5 py-1.5 rounded-md font-medium hover:opacity-90 transition-opacity"
+                className="bg-brand-primary hover:bg-brand-primary-hover text-white text-xs px-3.5 py-1.5 rounded-md font-medium transition-colors"
               >
                 Terapkan
               </button>

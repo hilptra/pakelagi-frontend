@@ -68,7 +68,7 @@ async function CatalogContent({ searchParams }: CatalogPageProps) {
       <ProductFilters categories={categories} currentParams={currentParams} />
 
       <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs text-zinc-500 font-mono">
+        <div className="flex items-center justify-between text-xs text-brand-muted font-mono">
           <span>
             Menampilkan {productsResponse.meta.from || 0} - {productsResponse.meta.to || 0} dari {productsResponse.meta.total} produk
           </span>
@@ -84,14 +84,14 @@ async function CatalogContent({ searchParams }: CatalogPageProps) {
 
 export default function CatalogPage(props: CatalogPageProps) {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full bg-[#fafafa]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full bg-background">
       <div className="space-y-6">
         {/* Catalog Header */}
-        <div className="border-b border-zinc-200 pb-5">
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
+        <div className="border-b border-brand-border pb-5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
             Katalog Preloved
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-500 mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-brand-muted mt-1 max-w-xl">
             Temukan fashion bekas terkurasi dengan kondisi jujur. Klik pada produk untuk melihat detail dan menghubungi penjual via WhatsApp.
           </p>
         </div>

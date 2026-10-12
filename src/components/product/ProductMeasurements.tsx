@@ -17,9 +17,9 @@ export function ProductMeasurements({ measurements }: ProductMeasurementsProps) 
   if (items.length === 0) return null;
 
   return (
-    <div className="space-y-3 p-4 rounded-xl border border-zinc-200 bg-white shadow-xs">
-      <div className="flex items-center gap-2 text-xs font-bold text-zinc-950 uppercase tracking-wider">
-        <Ruler className="w-4 h-4 text-emerald-700" />
+    <div className="space-y-3 p-4 rounded-xl border border-brand-border bg-surface shadow-xs">
+      <div className="flex items-center gap-2 text-xs font-bold text-foreground uppercase tracking-wider">
+        <Ruler className="w-4 h-4 text-brand-secondary" />
         <span>Detail Ukuran (Pakaian)</span>
       </div>
 
@@ -27,12 +27,12 @@ export function ProductMeasurements({ measurements }: ProductMeasurementsProps) 
         {items.map(([key, val]) => (
           <div
             key={key}
-            className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200"
+            className="flex flex-col p-2.5 rounded-lg bg-background border border-brand-border"
           >
-            <span className="text-[11px] text-zinc-500 capitalize">
+            <span className="text-[11px] text-brand-muted capitalize">
               {formatMeasurementKey(key)}
             </span>
-            <span className="text-sm font-bold text-zinc-950 mt-0.5">
+            <span className="text-sm font-bold text-foreground mt-0.5">
               {val} cm
             </span>
           </div>

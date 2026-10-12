@@ -21,7 +21,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
     <>
       <Suspense
         fallback={
-          <header className="h-16 w-full bg-[#F8F7F4] border-b border-[#E5E7EB]" />
+          <header className="h-16 w-full bg-background border-b border-brand-border" />
         }
       >
         <Navbar />

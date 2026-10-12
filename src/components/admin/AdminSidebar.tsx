@@ -56,10 +56,10 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   const content = (
     <div className="flex flex-col h-full">
       {/* Brand */}
-      <div className="h-14 flex items-center gap-3 px-5 border-b border-[#E5E7EB] shrink-0">
+      <div className="h-14 flex items-center gap-3 px-5 border-b border-brand-border shrink-0">
         <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
-          <PakeLagiLogo height={26} color="#1E3447" />
-          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1E3447] bg-[#E7DCC8]/50 border border-[#E7DCC8] px-2 py-0.5 rounded-full">
+          <PakeLagiLogo height={26} className="text-brand-primary" />
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-primary bg-brand-accent/50 border border-brand-accent px-2 py-0.5 rounded-full">
             Admin
           </span>
         </Link>
@@ -71,7 +71,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
           if (isNavGroup(entry)) {
             return (
               <div key={i}>
-                <p className="px-3 mb-1.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-[#6B7280]">
+                <p className="px-3 mb-1.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-brand-muted">
                   {entry.group}
                 </p>
                 <div className="space-y-0.5">
@@ -85,8 +85,8 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                         onClick={onClose}
                         className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
                           active
-                            ? "bg-[#1E3447] text-white"
-                            : "text-[#1F2937] hover:bg-[#E7DCC8]/30"
+                            ? "bg-brand-primary text-white"
+                            : "text-foreground hover:bg-brand-accent/30"
                         }`}
                       >
                         <Icon className="w-4 h-4 shrink-0" />
@@ -108,8 +108,8 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
               onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
                 active
-                  ? "bg-[#1E3447] text-white"
-                  : "text-[#1F2937] hover:bg-[#E7DCC8]/30"
+                  ? "bg-brand-primary text-white"
+                  : "text-foreground hover:bg-brand-accent/30"
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
@@ -120,11 +120,11 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
       </nav>
 
       {/* View public site */}
-      <div className="p-3 border-t border-[#E5E7EB] shrink-0">
+      <div className="p-3 border-t border-brand-border shrink-0">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center justify-center gap-2 w-full px-3 py-2 text-xs font-medium text-[#6B7280] hover:text-[#1E3447] bg-[#F8F7F4] border border-[#E5E7EB] rounded-lg transition-colors"
+          className="flex items-center justify-center gap-2 w-full px-3 py-2 text-xs font-medium text-brand-muted hover:text-brand-primary bg-background border border-brand-border rounded-lg transition-colors"
         >
           Lihat Katalog Publik
           <ExternalLink className="w-3 h-3" />
@@ -136,7 +136,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
   return (
     <>
       {/* Desktop: fixed sidebar */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:fixed lg:inset-y-0 bg-white border-r border-[#E5E7EB] z-30">
+      <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:fixed lg:inset-y-0 bg-surface border-r border-brand-border z-30">
         {content}
       </aside>
 
@@ -148,10 +148,10 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
             onClick={onClose}
             aria-hidden="true"
           />
-          <aside className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg flex flex-col">
+          <aside className="fixed inset-y-0 left-0 w-64 bg-surface shadow-lg flex flex-col">
             <button
               onClick={onClose}
-              className="absolute top-3.5 right-3 p-1.5 text-[#6B7280] hover:text-[#1F2937] rounded-lg"
+              className="absolute top-3.5 right-3 z-10 p-1.5 text-brand-muted hover:text-foreground rounded-lg"
               aria-label="Tutup menu"
             >
               <X className="w-5 h-5" />

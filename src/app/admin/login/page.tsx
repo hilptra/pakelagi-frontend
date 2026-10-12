@@ -56,37 +56,37 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center px-4 py-12 bg-[#F8F7F4]">
+    <div className="min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center px-4 py-12 bg-background">
       
       {/* Back to Home Link */}
       <div className="w-full max-w-md mb-6 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] hover:text-[#1E3447] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-muted hover:text-brand-primary transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Kembali ke Beranda</span>
         </Link>
 
-        <span className="text-[11px] font-mono font-medium text-[#6B7280] bg-[#E7DCC8]/40 border border-[#E7DCC8] px-2.5 py-0.5 rounded-full">
+        <span className="text-[11px] font-mono font-medium text-brand-muted bg-brand-accent/40 border border-brand-accent px-2.5 py-0.5 rounded-full">
           Portal Admin
         </span>
       </div>
 
       {/* Login Card */}
-      <div className="w-full max-w-md bg-white border border-[#E5E7EB] rounded-3xl p-6 sm:p-8 shadow-md space-y-6">
+      <div className="w-full max-w-md bg-surface border border-brand-border rounded-3xl p-6 sm:p-8 shadow-md space-y-6">
         
         {/* Header Logo & Title */}
         <div className="flex flex-col items-center text-center space-y-3">
           <Link href="/">
-            <PakeLagiLogo height={52} color="#1E3447" />
+            <PakeLagiLogo height={52} className="text-brand-primary" />
           </Link>
 
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold text-[#1F2937]">
+            <h1 className="text-2xl font-bold text-foreground">
               Login Admin
             </h1>
-            <p className="text-xs text-[#6B7280]">
+            <p className="text-xs text-brand-muted">
               Masuk untuk mengelola katalog pakaian preloved PakeLagi.
             </p>
           </div>
@@ -101,8 +101,8 @@ export default function AdminLoginPage() {
         )}
 
         {successMsg && (
-          <div className="p-3.5 rounded-xl border border-[#A7BFA7] bg-[#A7BFA7]/20 text-[#1E3447] text-xs flex items-center gap-2 font-medium">
-            <ShieldCheck className="w-4 h-4 text-[#1E3447] shrink-0" />
+          <div className="p-3.5 rounded-xl border border-brand-success bg-brand-success/20 text-brand-primary text-xs flex items-center gap-2 font-medium">
+            <ShieldCheck className="w-4 h-4 text-brand-primary shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
@@ -112,7 +112,7 @@ export default function AdminLoginPage() {
           
           {/* Email Input */}
           <div className="space-y-1.5">
-            <label htmlFor="email" className="block text-xs font-semibold text-[#1F2937]">
+            <label htmlFor="email" className="block text-xs font-semibold text-foreground">
               Email Admin <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -123,15 +123,15 @@ export default function AdminLoginPage() {
                 placeholder="pakelagi@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-xl pl-9 pr-4 py-3 border border-[#E5E7EB] focus:border-[#1E3447] focus:bg-white focus:outline-none transition-all"
+                className="w-full bg-background text-foreground text-xs rounded-xl pl-9 pr-4 py-3 border border-brand-border focus:border-brand-primary focus:bg-surface focus:outline-none transition-all"
               />
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
             </div>
           </div>
 
           {/* Password Input */}
           <div className="space-y-1.5">
-            <label htmlFor="password font-semibold" className="block text-xs font-semibold text-[#1F2937]">
+            <label htmlFor="password" className="block text-xs font-semibold text-foreground">
               Kata Sandi <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -142,14 +142,14 @@ export default function AdminLoginPage() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-xl pl-9 pr-10 py-3 border border-[#E5E7EB] focus:border-[#1E3447] focus:bg-white focus:outline-none transition-all"
+                className="w-full bg-background text-foreground text-xs rounded-xl pl-9 pr-10 py-3 border border-brand-border focus:border-brand-primary focus:bg-surface focus:outline-none transition-all"
               />
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#1F2937]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-muted hover:text-foreground"
                 aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -161,7 +161,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 bg-[#1E3447] hover:bg-[#162735] text-white font-semibold text-sm py-3.5 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full mt-2 bg-brand-primary hover:bg-brand-primary-hover text-white font-semibold text-sm py-3.5 px-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <span>Memproses...</span>
@@ -172,8 +172,8 @@ export default function AdminLoginPage() {
         </form>
 
         {/* Footer Note */}
-        <div className="pt-2 text-center border-t border-[#E5E7EB]">
-          <p className="text-[11px] text-[#6B7280]">
+        <div className="pt-2 text-center border-t border-brand-border">
+          <p className="text-[11px] text-brand-muted">
             Halaman ini khusus pengelola sistem PakeLagi.
           </p>
         </div>

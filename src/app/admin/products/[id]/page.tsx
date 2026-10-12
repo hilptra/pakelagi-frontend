@@ -110,21 +110,21 @@ export default function ProductDetailPage() {
   if (loading) {
     return (
       <div className="py-20 text-center space-y-4">
-        <Loader2 className="w-8 h-8 text-[#1E3447] animate-spin mx-auto" />
-        <p className="text-sm text-[#6B7280]">Memuat rincian produk...</p>
+        <Loader2 className="w-8 h-8 text-brand-primary animate-spin mx-auto" />
+        <p className="text-sm text-brand-muted">Memuat rincian produk...</p>
       </div>
     );
   }
 
   if (!product || errorMsg) {
     return (
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-8 text-center space-y-4">
+      <div className="bg-surface border border-brand-border rounded-xl p-8 text-center space-y-4">
         <AlertTriangle className="w-10 h-10 text-rose-500 mx-auto" />
-        <h3 className="text-lg font-medium text-[#1E3447]">Produk Tidak Ditemukan</h3>
-        <p className="text-sm text-[#6B7280]">{errorMsg || "Data tidak dapat diakses."}</p>
+        <h3 className="text-lg font-medium text-brand-primary">Produk Tidak Ditemukan</h3>
+        <p className="text-sm text-brand-muted">{errorMsg || "Data tidak dapat diakses."}</p>
         <Link
           href="/admin/products"
-          className="inline-flex items-center px-4 py-2 bg-[#1E3447] text-white rounded-lg text-sm font-medium hover:bg-[#1E3447]/90"
+          className="inline-flex items-center px-4 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-brand-primary-hover"
         >
           Kembali ke Daftar Produk
         </Link>
@@ -148,9 +148,9 @@ export default function ProductDetailPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href={`/admin/products/${product.id}/edit`}
-              className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#E5E7EB] text-[#1F2937] hover:bg-slate-50 text-xs font-medium rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 bg-surface border border-brand-border text-foreground hover:bg-background text-xs font-medium rounded-lg transition-colors"
             >
-              <Edit3 className="w-4 h-4 text-[#6B7280]" />
+              <Edit3 className="w-4 h-4 text-brand-muted" />
               Edit Produk
             </Link>
 
@@ -169,7 +169,7 @@ export default function ProductDetailPage() {
               <button
                 onClick={handleToggleStatus}
                 disabled={actionLoading}
-                className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#E5E7EB] text-[#1F2937] hover:bg-slate-50 text-xs font-medium rounded-lg disabled:opacity-50 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 bg-surface border border-brand-border text-foreground hover:bg-background text-xs font-medium rounded-lg disabled:opacity-50 transition-colors"
               >
                 {product.status === "available" ? (
                   <>
@@ -200,8 +200,8 @@ export default function ProductDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Gallery */}
         <div className="lg:col-span-1 space-y-4">
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 space-y-3">
-            <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-slate-100 border border-[#E5E7EB]">
+          <div className="bg-surface border border-brand-border rounded-xl p-4 space-y-3">
+            <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-background border border-brand-border">
               {selectedImage ? (
                 <img
                   src={selectedImage}
@@ -209,7 +209,7 @@ export default function ProductDetailPage() {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-[#6B7280]">
+                <div className="w-full h-full flex flex-col items-center justify-center text-brand-muted">
                   <ImageIcon className="w-10 h-10 mb-2 opacity-50" />
                   <span className="text-xs">Tidak ada foto</span>
                 </div>
@@ -229,7 +229,7 @@ export default function ProductDetailPage() {
                     onClick={() => setSelectedImage(img.url)}
                     className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImage === img.url
-                        ? "border-[#1E3447] ring-2 ring-[#1E3447]/20"
+                        ? "border-brand-primary ring-2 ring-brand-primary/20"
                         : "border-transparent opacity-70 hover:opacity-100"
                     }`}
                   >
@@ -239,7 +239,7 @@ export default function ProductDetailPage() {
                       className="w-full h-full object-cover"
                     />
                     {img.is_primary && (
-                      <span className="absolute bottom-0 inset-x-0 bg-[#1E3447] text-white text-[9px] text-center font-medium py-0.5">
+                      <span className="absolute bottom-0 inset-x-0 bg-brand-primary text-white text-[9px] text-center font-medium py-0.5">
                         Utama
                       </span>
                     )}
@@ -253,33 +253,33 @@ export default function ProductDetailPage() {
         {/* Right Column: Detailed Product Info */}
         <div className="lg:col-span-2 space-y-6">
           {/* Main Attributes */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-6">
+          <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-6">
             <div>
-              <span className="text-xs font-semibold text-[#6B7F6B] uppercase tracking-wider">
+              <span className="text-xs font-semibold text-brand-secondary uppercase tracking-wider">
                 {product.category?.name || "Kategori Terhapus"}
               </span>
-              <h2 className="text-2xl font-bold text-[#1E3447] mt-1">{product.name}</h2>
-              <div className="text-2xl font-semibold text-[#1E3447] mt-2">
+              <h2 className="text-2xl font-bold text-brand-primary mt-1">{product.name}</h2>
+              <div className="text-2xl font-semibold text-brand-primary mt-2">
                 {formatRupiah(product.price)}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-[#E5E7EB]">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-brand-border">
               <div>
-                <span className="text-xs text-[#6B7280]">Ukuran</span>
-                <p className="text-sm font-semibold text-[#1F2937]">{product.size_label}</p>
+                <span className="text-xs text-brand-muted">Ukuran</span>
+                <p className="text-sm font-semibold text-foreground">{product.size_label}</p>
               </div>
 
               <div>
-                <span className="text-xs text-[#6B7280]">Kondisi</span>
-                <p className="text-sm font-semibold text-[#1F2937]">
+                <span className="text-xs text-brand-muted">Kondisi</span>
+                <p className="text-sm font-semibold text-foreground">
                   {getConditionLabel(product.condition)}
                 </p>
               </div>
 
               <div>
-                <span className="text-xs text-[#6B7280]">Merek / Brand</span>
-                <p className="text-sm font-semibold text-[#1F2937]">
+                <span className="text-xs text-brand-muted">Merek / Brand</span>
+                <p className="text-sm font-semibold text-foreground">
                   {product.brand || "-"}
                 </p>
               </div>
@@ -293,11 +293,11 @@ export default function ProductDetailPage() {
             )}
 
             {product.description && (
-              <div className="space-y-1.5 pt-4 border-t border-[#E5E7EB]">
-                <h3 className="text-xs font-semibold text-[#1F2937] uppercase tracking-wider">
+              <div className="space-y-1.5 pt-4 border-t border-brand-border">
+                <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider">
                   Deskripsi Produk
                 </h3>
-                <p className="text-sm text-[#1F2937]/90 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-line">
                   {product.description}
                 </p>
               </div>
@@ -306,18 +306,18 @@ export default function ProductDetailPage() {
 
           {/* Measurements */}
           {product.measurements && Object.keys(product.measurements).length > 0 && (
-            <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-3">
-              <div className="flex items-center gap-2 text-[#1E3447]">
-                <Ruler className="w-4 h-4 text-[#6B7F6B]" />
+            <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-3">
+              <div className="flex items-center gap-2 text-brand-primary">
+                <Ruler className="w-4 h-4 text-brand-secondary" />
                 <h3 className="text-sm font-semibold">Dimensi / Ukuran Fisik</h3>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {Object.entries(product.measurements).map(([key, val]) => (
-                  <div key={key} className="p-2.5 bg-slate-50 border border-[#E5E7EB] rounded-lg">
-                    <span className="text-xs text-[#6B7280] block">
+                  <div key={key} className="p-2.5 bg-background border border-brand-border rounded-lg">
+                    <span className="text-xs text-brand-muted block">
                       {formatMeasurementKey(key)}
                     </span>
-                    <span className="text-sm font-bold text-[#1E3447]">{val} cm</span>
+                    <span className="text-sm font-bold text-brand-primary">{val} cm</span>
                   </div>
                 ))}
               </div>
@@ -325,13 +325,13 @@ export default function ProductDetailPage() {
           )}
 
           {/* Metadata */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[#6B7280]">
+          <div className="bg-surface border border-brand-border rounded-xl p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-brand-muted">
             <div>
-              <span className="block font-medium text-[#1F2937]">Tanggal Ditambahkan</span>
+              <span className="block font-medium text-foreground">Tanggal Ditambahkan</span>
               <span>{new Date(product.created_at).toLocaleString("id-ID")}</span>
             </div>
             <div>
-              <span className="block font-medium text-[#1F2937]">Terakhir Diperbarui</span>
+              <span className="block font-medium text-foreground">Terakhir Diperbarui</span>
               <span>{new Date(product.updated_at).toLocaleString("id-ID")}</span>
             </div>
             {product.sold_at && (

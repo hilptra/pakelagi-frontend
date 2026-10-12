@@ -200,21 +200,21 @@ export default function EditProductPage() {
   if (loading) {
     return (
       <div className="py-20 text-center space-y-4">
-        <Loader2 className="w-8 h-8 text-[#1E3447] animate-spin mx-auto" />
-        <p className="text-sm text-[#6B7280]">Memuat data produk...</p>
+        <Loader2 className="w-8 h-8 text-brand-primary animate-spin mx-auto" />
+        <p className="text-sm text-brand-muted">Memuat data produk...</p>
       </div>
     );
   }
 
   if (!product && errorMsg) {
     return (
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-8 text-center space-y-4">
+      <div className="bg-surface border border-brand-border rounded-xl p-8 text-center space-y-4">
         <AlertTriangle className="w-10 h-10 text-rose-500 mx-auto" />
-        <h3 className="text-lg font-medium text-[#1E3447]">Produk tidak ditemukan</h3>
-        <p className="text-sm text-[#6B7280]">{errorMsg}</p>
+        <h3 className="text-lg font-medium text-brand-primary">Produk tidak ditemukan</h3>
+        <p className="text-sm text-brand-muted">{errorMsg}</p>
         <Link
           href="/admin/products"
-          className="inline-flex items-center px-4 py-2 bg-[#1E3447] text-white rounded-lg text-sm font-medium hover:bg-[#1E3447]/90"
+          className="inline-flex items-center px-4 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-brand-primary-hover"
         >
           Kembali ke Daftar Produk
         </Link>
@@ -243,12 +243,12 @@ export default function EditProductPage() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Section 1: Informasi Dasar */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-[#1E3447]">Informasi Dasar</h2>
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-brand-primary">Informasi Dasar</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Nama Produk <span className="text-rose-500">*</span>
               </label>
               <input
@@ -256,7 +256,7 @@ export default function EditProductPage() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.name && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.name[0]}</p>
@@ -264,14 +264,14 @@ export default function EditProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Kategori <span className="text-rose-500">*</span>
               </label>
               <select
                 required
                 value={categoryId}
                 onChange={(e) => setCategoryId(Number(e.target.value))}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm bg-white"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-surface text-foreground"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -285,12 +285,12 @@ export default function EditProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Merek / Brand</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Merek / Brand</label>
               <input
                 type="text"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.brand && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.brand[0]}</p>
@@ -298,12 +298,12 @@ export default function EditProductPage() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Deskripsi</label>
               <textarea
                 rows={4}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.description && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.description[0]}</p>
@@ -313,12 +313,12 @@ export default function EditProductPage() {
         </div>
 
         {/* Section 2: Harga & Kondisi */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-[#1E3447]">Harga & Kondisi</h2>
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-brand-primary">Harga & Kondisi</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Harga (Rp) <span className="text-rose-500">*</span>
               </label>
               <input
@@ -327,7 +327,7 @@ export default function EditProductPage() {
                 min={0}
                 value={price}
                 onChange={(e) => setPrice(e.target.value === "" ? "" : Number(e.target.value))}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.price && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.price[0]}</p>
@@ -335,7 +335,7 @@ export default function EditProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Ukuran (Size Label) <span className="text-rose-500">*</span>
               </label>
               <input
@@ -343,7 +343,7 @@ export default function EditProductPage() {
                 required
                 value={sizeLabel}
                 onChange={(e) => setSizeLabel(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.size_label && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.size_label[0]}</p>
@@ -351,13 +351,13 @@ export default function EditProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Kondisi <span className="text-rose-500">*</span>
               </label>
               <select
                 value={condition}
                 onChange={(e) => setCondition(e.target.value as ConditionType)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm bg-white"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-surface text-foreground"
               >
                 <option value="like_new">Sangat Baik (Like New)</option>
                 <option value="good">Bagus (Good)</option>
@@ -369,12 +369,12 @@ export default function EditProductPage() {
             </div>
 
             <div className="md:col-span-3">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Catatan Kondisi</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Catatan Kondisi</label>
               <input
                 type="text"
                 value={conditionNotes}
                 onChange={(e) => setConditionNotes(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.condition_notes && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.condition_notes[0]}</p>
@@ -385,10 +385,10 @@ export default function EditProductPage() {
 
         {/* Section 3: Ukuran Detail / Measurements */}
         {selectedCategory?.measurement_fields && selectedCategory.measurement_fields.length > 0 && (
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
+          <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
             <div>
-              <h2 className="text-lg font-semibold text-[#1E3447]">Dimensi / Ukuran Fisik (cm)</h2>
-              <p className="text-xs text-[#6B7280]">
+              <h2 className="text-lg font-semibold text-brand-primary">Dimensi / Ukuran Fisik (cm)</h2>
+              <p className="text-xs text-brand-muted">
                 Spesifikasi ukuran detail untuk kategori {selectedCategory.name}
               </p>
             </div>
@@ -396,7 +396,7 @@ export default function EditProductPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {selectedCategory.measurement_fields.map((field) => (
                 <div key={field}>
-                  <label className="block text-xs font-medium text-[#1F2937] capitalize mb-1">
+                  <label className="block text-xs font-medium text-foreground capitalize mb-1">
                     {field.replace(/_/g, " ")} (cm)
                   </label>
                   <input
@@ -410,7 +410,7 @@ export default function EditProductPage() {
                         [field]: e.target.value === "" ? "" : Number(e.target.value),
                       })
                     }
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                    className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
                   />
                 </div>
               ))}
@@ -419,16 +419,16 @@ export default function EditProductPage() {
         )}
 
         {/* Section 4: Kelola Foto Produk */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-[#1E3447]">Kelola Foto Produk</h2>
-              <p className="text-xs text-[#6B7280]">
+              <h2 className="text-lg font-semibold text-brand-primary">Kelola Foto Produk</h2>
+              <p className="text-xs text-brand-muted">
                 Atur foto utama, upload foto baru, atau hapus foto yang tidak digunakan.
               </p>
             </div>
             {uploadingImages && (
-              <span className="flex items-center gap-1.5 text-xs text-[#1E3447] font-medium">
+              <span className="flex items-center gap-1.5 text-xs text-brand-primary font-medium">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 Mengunggah foto...
               </span>
@@ -439,7 +439,7 @@ export default function EditProductPage() {
             {images.map((img) => (
               <div
                 key={img.id}
-                className="relative aspect-square rounded-lg border border-[#E5E7EB] overflow-hidden group bg-slate-50"
+                className="relative aspect-square rounded-lg border border-brand-border overflow-hidden group bg-background"
               >
                 <img
                   src={img.url}
@@ -472,22 +472,22 @@ export default function EditProductPage() {
                 </div>
 
                 {img.is_primary && (
-                  <span className="absolute top-1 left-1 px-1.5 py-0.5 bg-[#1E3447] text-white text-[10px] rounded font-medium shadow-sm">
+                  <span className="absolute top-1 left-1 px-1.5 py-0.5 bg-brand-primary text-white text-[10px] rounded font-medium shadow-sm">
                     Utama
                   </span>
                 )}
 
                 {imageActionLoading === img.id && (
-                  <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-                    <Loader2 className="w-5 h-5 text-[#1E3447] animate-spin" />
+                  <div className="absolute inset-0 bg-surface/70 flex items-center justify-center">
+                    <Loader2 className="w-5 h-5 text-brand-primary animate-spin" />
                   </div>
                 )}
               </div>
             ))}
 
-            <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-[#E5E7EB] hover:border-[#1E3447] rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100/50 transition-colors">
-              <Upload className="w-6 h-6 text-[#6B7280] mb-1" />
-              <span className="text-xs text-[#6B7280] font-medium text-center px-2">
+            <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-brand-border hover:border-brand-primary rounded-lg cursor-pointer bg-background hover:bg-brand-border/50 transition-colors">
+              <Upload className="w-6 h-6 text-brand-muted mb-1" />
+              <span className="text-xs text-brand-muted font-medium text-center px-2">
                 Tambah Foto
               </span>
               <input
@@ -503,17 +503,17 @@ export default function EditProductPage() {
         </div>
 
         {/* Bottom Actions */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E7EB]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-brand-border">
           <Link
             href={`/admin/products/${productId}`}
-            className="px-4 py-2 text-sm font-medium text-[#1F2937] hover:bg-slate-100 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-medium text-foreground hover:bg-background rounded-lg transition-colors"
           >
             Batal
           </Link>
           <button
             type="submit"
             disabled={submitting}
-            className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-[#1E3447] hover:bg-[#1E3447]/90 rounded-lg disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary-hover rounded-lg disabled:opacity-50 transition-colors"
           >
             {submitting ? (
               <>

@@ -48,29 +48,29 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   const statusInfo = getStatusBadge(product.status);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full space-y-12 bg-[#F8F7F4]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 w-full space-y-12 bg-background">
       
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs text-[#6B7280]">
-        <Link href="/products" className="hover:text-[#1E3447] flex items-center gap-1 font-medium">
+      <nav className="flex items-center gap-2 text-xs text-brand-muted">
+        <Link href="/products" className="hover:text-brand-primary flex items-center gap-1 font-medium">
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Katalog</span>
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-[#9CA3AF]" />
+        <ChevronRight className="w-3.5 h-3.5 text-brand-muted" />
         <Link
           href={`/products?category=${product.category.slug}`}
-          className="hover:text-[#1E3447] capitalize font-medium"
+          className="hover:text-brand-primary capitalize font-medium"
         >
           {product.category.name}
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-[#9CA3AF]" />
-        <span className="text-[#1F2937] font-semibold truncate max-w-[150px] sm:max-w-xs">
+        <ChevronRight className="w-3.5 h-3.5 text-brand-muted" />
+        <span className="text-foreground font-semibold truncate max-w-37.5 sm:max-w-xs">
           {product.name}
         </span>
       </nav>
 
       {/* Main Product Layout matching Brand Sheet */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start bg-white p-6 md:p-8 rounded-3xl border border-[#E5E7EB] shadow-xs">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start bg-surface p-6 md:p-8 rounded-3xl border border-brand-border shadow-xs">
         
         {/* Left Column: Vertical Thumbnails + Main Photo Gallery */}
         <div className="md:col-span-7">
@@ -81,22 +81,22 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         <div className="md:col-span-5 flex flex-col gap-5">
           
           {/* Header Info */}
-          <div className="space-y-2 border-b border-[#E5E7EB] pb-5">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937] leading-tight">
+          <div className="space-y-2 border-b border-brand-border pb-5">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
               {product.name}
             </h1>
 
-            <p className="text-2xl sm:text-3xl font-bold text-[#1E3447] pt-1">
+            <p className="text-2xl sm:text-3xl font-bold text-brand-primary pt-1">
               {formatRupiah(product.price)}
             </p>
           </div>
 
           {/* Badges Row */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="bg-[#F8F7F4] text-[#1F2937] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-[#E5E7EB]">
+            <span className="bg-background text-foreground text-xs font-semibold px-3.5 py-1.5 rounded-full border border-brand-border">
               {getConditionLabel(product.condition)}
             </span>
-            <span className="bg-[#1E3447] text-white text-xs font-bold px-3 py-1.5 rounded-full">
+            <span className="bg-brand-primary text-white text-xs font-bold px-3 py-1.5 rounded-full">
               {product.size_label}
             </span>
             <span className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${statusInfo.color}`}>
@@ -105,8 +105,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
 
           {/* Tags row */}
-          <div className="flex items-center gap-3 text-xs text-[#6B7280]">
-            <span className="font-semibold text-[#1F2937] capitalize">{product.category.name}</span>
+          <div className="flex items-center gap-3 text-xs text-brand-muted">
+            <span className="font-semibold text-foreground capitalize">{product.category.name}</span>
             <span>•</span>
             <span className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5" />
@@ -132,8 +132,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           {/* Description */}
           {product.description && (
-            <div className="space-y-2 text-xs sm:text-sm text-[#6B7280] leading-relaxed border-t border-[#E5E7EB] pt-4">
-              <h3 className="text-xs font-bold text-[#1F2937] uppercase tracking-wider">
+            <div className="space-y-2 text-xs sm:text-sm text-brand-muted leading-relaxed border-t border-brand-border pt-4">
+              <h3 className="text-xs font-bold text-foreground uppercase tracking-wider">
                 Deskripsi Produk
               </h3>
               <p className="whitespace-pre-line">{product.description}</p>
@@ -141,11 +141,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           )}
 
           {/* WhatsApp Primary CTA & Delivery Note */}
-          <div className="space-y-3 pt-4 border-t border-[#E5E7EB]">
+          <div className="space-y-3 pt-4 border-t border-brand-border">
             <WhatsAppButton product={product} />
 
-            <div className="flex items-center justify-center gap-1.5 text-xs text-[#6B7280] pt-1">
-              <Truck className="w-4 h-4 text-[#1E3447]" />
+            <div className="flex items-center justify-center gap-1.5 text-xs text-brand-muted pt-1">
+              <Truck className="w-4 h-4 text-brand-primary" />
               <span>Pengiriman: Bisa diambil langsung / COD (nego)</span>
             </div>
           </div>
@@ -156,14 +156,14 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
-        <section className="pt-8 border-t border-[#E5E7EB] space-y-6">
+        <section className="pt-8 border-t border-brand-border space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg sm:text-xl font-bold text-[#1F2937]">
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               Produk Serupa di Kategori {product.category.name}
             </h2>
             <Link
               href={`/products?category=${product.category.slug}`}
-              className="text-xs font-semibold text-[#1E3447] hover:underline"
+              className="text-xs font-semibold text-brand-primary hover:underline"
             >
               Lihat Kategori Ini
             </Link>

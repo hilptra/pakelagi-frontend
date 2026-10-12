@@ -168,9 +168,9 @@ export default function AdminProductsPage() {
   // ── Status filter tabs ──────────────────────────────────────────────
 
   const statusTabs: { value: StatusFilter; label: string; activeClass: string }[] = [
-    { value: "", label: "Semua", activeClass: "bg-[#1E3447] text-white" },
+    { value: "", label: "Semua", activeClass: "bg-brand-primary text-white" },
     { value: "available", label: "Tersedia", activeClass: "bg-emerald-700 text-white" },
-    { value: "sold", label: "Terjual", activeClass: "bg-[#1E3447] text-white" },
+    { value: "sold", label: "Terjual", activeClass: "bg-brand-primary text-white" },
     { value: "hidden", label: "Tersembunyi", activeClass: "bg-amber-700 text-white" },
   ];
 
@@ -186,7 +186,7 @@ export default function AdminProductsPage() {
         actions={
           <Link
             href="/admin/products/create"
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#1E3447] hover:bg-[#162735] rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-brand-primary hover:bg-brand-primary-hover rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             Tambah Produk
@@ -202,23 +202,23 @@ export default function AdminProductsPage() {
         </div>
       )}
       {successMsg && (
-        <div className="mb-4 p-3 rounded-lg border border-[#A7BFA7] bg-[#A7BFA7]/20 text-[#1E3447] text-xs flex items-center gap-2 font-medium">
+        <div className="mb-4 p-3 rounded-lg border border-brand-success bg-brand-success/20 text-brand-primary text-xs flex items-center gap-2 font-medium">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{successMsg}</span>
         </div>
       )}
 
       {/* Search + Filters */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4 bg-white p-3 rounded-lg border border-[#E5E7EB]">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4 bg-surface p-3 rounded-lg border border-brand-border">
         <form onSubmit={handleSearch} className="relative flex-1 max-w-md">
           <input
             type="search"
             placeholder="Cari nama, brand, atau deskripsi..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg pl-9 pr-4 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:bg-white focus:outline-none transition-colors"
+            className="w-full bg-background text-foreground text-xs rounded-lg pl-9 pr-4 py-2.5 border border-brand-border focus:border-brand-primary focus:bg-surface focus:outline-none transition-colors"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
         </form>
 
         <div className="flex items-center gap-1 overflow-x-auto">
@@ -229,7 +229,7 @@ export default function AdminProductsPage() {
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap ${
                 statusFilter === tab.value
                   ? tab.activeClass
-                  : "bg-[#F8F7F4] text-[#6B7280] hover:text-[#1F2937]"
+                  : "bg-background text-brand-muted hover:text-foreground"
               }`}
             >
               {tab.label}
@@ -239,19 +239,19 @@ export default function AdminProductsPage() {
       </div>
 
       {/* Products table */}
-      <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden">
+      <div className="bg-surface border border-brand-border rounded-lg overflow-hidden">
         {isLoading ? (
           <div className="p-12 text-center">
-            <div className="w-6 h-6 border-2 border-[#1E3447] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-xs text-[#6B7280]">Memuat produk...</p>
+            <div className="w-6 h-6 border-2 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-xs text-brand-muted">Memuat produk...</p>
           </div>
         ) : products.length === 0 ? (
           <div className="p-12 text-center space-y-2">
-            <Package className="w-8 h-8 text-[#9CA3AF] mx-auto" />
-            <p className="text-sm font-semibold text-[#1F2937]">
+            <Package className="w-8 h-8 text-brand-muted mx-auto" />
+            <p className="text-sm font-semibold text-foreground">
               Tidak ada produk ditemukan
             </p>
-            <p className="text-xs text-[#6B7280]">
+            <p className="text-xs text-brand-muted">
               {searchInput || statusFilter
                 ? "Coba ubah kata kunci atau filter."
                 : "Mulai dengan menambahkan produk pertama."}
@@ -259,7 +259,7 @@ export default function AdminProductsPage() {
             {!searchInput && !statusFilter && (
               <Link
                 href="/admin/products/create"
-                className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 text-xs font-semibold text-white bg-[#1E3447] rounded-lg hover:bg-[#162735]"
+                className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 text-xs font-semibold text-white bg-brand-primary rounded-lg hover:bg-brand-primary-hover"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Tambah Produk
@@ -269,7 +269,7 @@ export default function AdminProductsPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#F8F7F4] border-b border-[#E5E7EB] text-[#6B7280]">
+              <thead className="bg-background border-b border-brand-border text-brand-muted">
                 <tr>
                   <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wide">
                     Produk
@@ -288,7 +288,7 @@ export default function AdminProductsPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E7EB]">
+              <tbody className="divide-y divide-brand-border">
                 {products.map((product) => {
                   const badge = getStatusBadge(product.status);
                   const imgUrl =
@@ -299,12 +299,12 @@ export default function AdminProductsPage() {
                   return (
                     <tr
                       key={product.id}
-                      className="hover:bg-[#F8F7F4]/60 transition-colors"
+                      className="hover:bg-background/60 transition-colors"
                     >
                       {/* Product */}
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-10 h-10 rounded-md overflow-hidden bg-[#F8F7F4] border border-[#E5E7EB] shrink-0">
+                          <div className="relative w-10 h-10 rounded-md overflow-hidden bg-background border border-brand-border shrink-0">
                             {imgUrl ? (
                               <Image
                                 src={imgUrl}
@@ -315,18 +315,18 @@ export default function AdminProductsPage() {
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center">
-                                <Package className="w-4 h-4 text-[#9CA3AF]" />
+                                <Package className="w-4 h-4 text-brand-muted" />
                               </div>
                             )}
                           </div>
                           <div className="min-w-0">
                             <Link
                               href={`/admin/products/${product.id}`}
-                              className="text-xs font-semibold text-[#1F2937] hover:text-[#1E3447] hover:underline truncate block"
+                              className="text-xs font-semibold text-foreground hover:text-brand-primary hover:underline truncate block"
                             >
                               {product.name}
                             </Link>
-                            <span className="text-[11px] text-[#6B7280]">
+                            <span className="text-[11px] text-brand-muted">
                               {product.category?.name}
                             </span>
                           </div>
@@ -334,17 +334,17 @@ export default function AdminProductsPage() {
                       </td>
 
                       {/* Price */}
-                      <td className="py-3 px-4 font-semibold text-[#1F2937] whitespace-nowrap">
+                      <td className="py-3 px-4 font-semibold text-foreground whitespace-nowrap">
                         {formatRupiah(product.price)}
                       </td>
 
                       {/* Size / Condition */}
                       <td className="py-3 px-4 hidden md:table-cell">
                         <div className="flex items-center gap-1.5">
-                          <span className="bg-[#1E3447] text-white font-bold text-[10px] px-2 py-0.5 rounded-full">
+                          <span className="bg-brand-primary text-white font-bold text-[10px] px-2 py-0.5 rounded-full">
                             {product.size_label}
                           </span>
-                          <span className="text-[11px] text-[#6B7280]">
+                          <span className="text-[11px] text-brand-muted">
                             {getConditionLabel(product.condition)}
                           </span>
                         </div>
@@ -365,7 +365,7 @@ export default function AdminProductsPage() {
                           {/* Edit */}
                           <Link
                             href={`/admin/products/${product.id}/edit`}
-                            className="p-1.5 text-[#6B7280] hover:text-[#1E3447] hover:bg-[#F8F7F4] rounded-md transition-colors"
+                            className="p-1.5 text-brand-muted hover:text-brand-primary hover:bg-background rounded-md transition-colors"
                             title="Edit produk"
                           >
                             <Pencil className="w-3.5 h-3.5" />
@@ -375,7 +375,7 @@ export default function AdminProductsPage() {
                           {product.status === "available" && (
                             <button
                               onClick={() => handleMarkSold(product)}
-                              className="p-1.5 text-[#6B7280] hover:text-[#1E3447] hover:bg-[#E7DCC8]/30 rounded-md transition-colors"
+                              className="p-1.5 text-brand-muted hover:text-brand-primary hover:bg-brand-accent/30 rounded-md transition-colors"
                               title="Tandai terjual"
                             >
                               <ShoppingBag className="w-3.5 h-3.5" />
@@ -388,7 +388,7 @@ export default function AdminProductsPage() {
                               onClick={() =>
                                 handleToggleStatus(product, "hidden")
                               }
-                              className="p-1.5 text-[#6B7280] hover:text-amber-700 hover:bg-amber-50 rounded-md transition-colors"
+                              className="p-1.5 text-brand-muted hover:text-amber-700 hover:bg-amber-50 rounded-md transition-colors"
                               title="Sembunyikan"
                             >
                               <EyeOff className="w-3.5 h-3.5" />
@@ -399,7 +399,7 @@ export default function AdminProductsPage() {
                               onClick={() =>
                                 handleToggleStatus(product, "available")
                               }
-                              className="p-1.5 text-[#6B7280] hover:text-emerald-700 hover:bg-emerald-50 rounded-md transition-colors"
+                              className="p-1.5 text-brand-muted hover:text-emerald-700 hover:bg-emerald-50 rounded-md transition-colors"
                               title="Tampilkan"
                             >
                               <Eye className="w-3.5 h-3.5" />
@@ -409,7 +409,7 @@ export default function AdminProductsPage() {
                           {/* Delete */}
                           <button
                             onClick={() => setDeleteTarget(product)}
-                            className="p-1.5 text-[#6B7280] hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                            className="p-1.5 text-brand-muted hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
                             title="Hapus produk"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -426,7 +426,7 @@ export default function AdminProductsPage() {
 
         {/* Pagination */}
         {meta && meta.last_page > 1 && (
-          <div className="p-3 border-t border-[#E5E7EB] bg-[#F8F7F4] flex items-center justify-between text-xs text-[#6B7280]">
+          <div className="p-3 border-t border-brand-border bg-background flex items-center justify-between text-xs text-brand-muted">
             <span>
               {meta.from}–{meta.to} dari {meta.total} produk
             </span>
@@ -434,7 +434,7 @@ export default function AdminProductsPage() {
               <button
                 disabled={currentPage <= 1}
                 onClick={() => setCurrentPage((p) => p - 1)}
-                className="p-1.5 bg-white border border-[#E5E7EB] rounded-md disabled:opacity-40 hover:bg-[#F8F7F4] transition-colors"
+                className="p-1.5 bg-surface border border-brand-border rounded-md disabled:opacity-40 hover:bg-background transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -444,7 +444,7 @@ export default function AdminProductsPage() {
               <button
                 disabled={currentPage >= meta.last_page}
                 onClick={() => setCurrentPage((p) => p + 1)}
-                className="p-1.5 bg-white border border-[#E5E7EB] rounded-md disabled:opacity-40 hover:bg-[#F8F7F4] transition-colors"
+                className="p-1.5 bg-surface border border-brand-border rounded-md disabled:opacity-40 hover:bg-background transition-colors"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

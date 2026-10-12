@@ -157,7 +157,7 @@ export default function CategoriesPage() {
         actions={
           <button
             onClick={openCreateModal}
-            className="flex items-center gap-2 px-4 py-2 bg-[#1E3447] text-white rounded-lg text-sm font-medium hover:bg-[#1E3447]/90 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg text-sm font-medium hover:bg-brand-primary/90 transition-colors"
           >
             <Plus className="w-4 h-4" />
             Tambah Kategori
@@ -184,17 +184,17 @@ export default function CategoriesPage() {
       )}
 
       {/* Table Section */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden">
+      <div className="bg-surface border border-brand-border rounded-xl overflow-hidden">
         {loading ? (
           <div className="py-20 text-center space-y-3">
-            <Loader2 className="w-8 h-8 text-[#1E3447] animate-spin mx-auto" />
-            <p className="text-sm text-[#6B7280]">Memuat daftar kategori...</p>
+            <Loader2 className="w-8 h-8 text-brand-primary animate-spin mx-auto" />
+            <p className="text-sm text-brand-muted">Memuat daftar kategori...</p>
           </div>
         ) : categories.length === 0 ? (
           <div className="py-16 text-center space-y-3">
-            <Tag className="w-10 h-10 text-[#6B7280] mx-auto opacity-50" />
-            <p className="text-[#1F2937] font-medium">Belum Ada Kategori</p>
-            <p className="text-xs text-[#6B7280]">
+            <Tag className="w-10 h-10 text-brand-muted mx-auto opacity-50" />
+            <p className="text-foreground font-medium">Belum Ada Kategori</p>
+            <p className="text-xs text-brand-muted">
               Klik tombol "Tambah Kategori" untuk membuat kategori produk pertama Anda.
             </p>
           </div>
@@ -202,7 +202,7 @@ export default function CategoriesPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-[#E5E7EB] text-xs font-semibold text-[#6B7280] uppercase tracking-wider">
+                <tr className="bg-slate-50 border-b border-brand-border text-xs font-semibold text-brand-muted uppercase tracking-wider">
                   <th className="py-3 px-4">Nama Kategori</th>
                   <th className="py-3 px-4">Slug API</th>
                   <th className="py-3 px-4">Spesifikasi Ukuran (Measurement Fields)</th>
@@ -210,13 +210,13 @@ export default function CategoriesPage() {
                   <th className="py-3 px-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E7EB] text-sm text-[#1F2937]">
+              <tbody className="divide-y divide-brand-border text-sm text-foreground">
                 {categories.map((cat) => (
                   <tr key={cat.id} className="hover:bg-slate-50/70 transition-colors">
-                    <td className="py-3.5 px-4 font-semibold text-[#1E3447]">
+                    <td className="py-3.5 px-4 font-semibold text-brand-primary">
                       {cat.name}
                     </td>
-                    <td className="py-3.5 px-4 font-mono text-xs text-[#6B7280]">
+                    <td className="py-3.5 px-4 font-mono text-xs text-brand-muted">
                       {cat.slug}
                     </td>
                     <td className="py-3.5 px-4">
@@ -225,25 +225,25 @@ export default function CategoriesPage() {
                           {cat.measurement_fields.map((field) => (
                             <span
                               key={field}
-                              className="px-2 py-0.5 bg-slate-100 text-[#1F2937] text-xs rounded border border-[#E5E7EB]"
+                              className="px-2 py-0.5 bg-slate-100 text-foreground text-xs rounded border border-brand-border"
                             >
                               {field}
                             </span>
                           ))}
                         </div>
                       ) : (
-                        <span className="text-xs text-[#6B7280] italic">Tidak ada</span>
+                        <span className="text-xs text-brand-muted italic">Tidak ada</span>
                       )}
                     </td>
                     <td className="py-3.5 px-4 text-center font-medium">
-                      <span className="px-2.5 py-1 bg-slate-100 rounded-full text-xs font-semibold text-[#1E3447]">
+                      <span className="px-2.5 py-1 bg-slate-100 rounded-full text-xs font-semibold text-brand-primary">
                         {cat.products_count ?? 0}
                       </span>
                     </td>
                     <td className="py-3.5 px-4 text-right space-x-2">
                       <button
                         onClick={() => openEditModal(cat)}
-                        className="p-1.5 text-slate-600 hover:text-[#1E3447] hover:bg-slate-100 rounded-md transition-colors"
+                        className="p-1.5 text-slate-600 hover:text-brand-primary hover:bg-slate-100 rounded-md transition-colors"
                         title="Edit Kategori"
                       >
                         <Edit3 className="w-4 h-4" />
@@ -267,9 +267,9 @@ export default function CategoriesPage() {
       {/* Modal Add / Edit Category */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full p-6 space-y-4 shadow-xl border border-[#E5E7EB]">
-            <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3">
-              <h3 className="text-lg font-semibold text-[#1E3447]">
+          <div className="bg-surface rounded-xl max-w-md w-full p-6 space-y-4 shadow-xl border border-brand-border">
+            <div className="flex items-center justify-between border-b border-brand-border pb-3">
+              <h3 className="text-lg font-semibold text-brand-primary">
                 {editingCategory ? "Edit Kategori" : "Tambah Kategori Baru"}
               </h3>
               <button
@@ -282,7 +282,7 @@ export default function CategoriesPage() {
 
             <form onSubmit={handleSaveCategory} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[#1F2937] mb-1">
+                <label className="block text-sm font-medium text-foreground mb-1">
                   Nama Kategori <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -291,7 +291,7 @@ export default function CategoriesPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Contoh: Outerwear, Celana, Kaos"
-                  className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                  className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm"
                 />
                 {modalErrors.name && (
                   <p className="text-xs text-rose-500 mt-1">{modalErrors.name[0]}</p>
@@ -299,10 +299,10 @@ export default function CategoriesPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#1F2937] mb-1">
+                <label className="block text-sm font-medium text-foreground mb-1">
                   Bidang Spesifikasi Ukuran (Measurement Fields)
                 </label>
-                <p className="text-xs text-[#6B7280] mb-2">
+                <p className="text-xs text-brand-muted mb-2">
                   Bidang ini akan muncul pada form produk dalam kategori ini (misal: chest, length, waist)
                 </p>
 
@@ -318,27 +318,27 @@ export default function CategoriesPage() {
                         handleAddField();
                       }
                     }}
-                    className="flex-1 px-3 py-1.5 border border-[#E5E7EB] rounded-lg focus:outline-none text-xs"
+                    className="flex-1 px-3 py-1.5 border border-brand-border rounded-lg focus:outline-none text-xs"
                   />
                   <button
                     type="button"
                     onClick={handleAddField}
-                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-[#1F2937] font-medium text-xs rounded-lg transition-colors"
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-foreground font-medium text-xs rounded-lg transition-colors"
                   >
                     Tambah
                   </button>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 min-h-[32px] p-2 bg-slate-50 border border-[#E5E7EB] rounded-lg">
+                <div className="flex flex-wrap gap-1.5 min-h-8 p-2 bg-slate-50 border border-brand-border rounded-lg">
                   {measurementFields.length === 0 ? (
-                    <span className="text-xs text-[#6B7280] italic">
+                    <span className="text-xs text-brand-muted italic">
                       Belum ada spesifikasi ukuran
                     </span>
                   ) : (
                     measurementFields.map((field, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-[#E5E7EB] text-[#1F2937] text-xs rounded font-mono"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 bg-surface border border-brand-border text-foreground text-xs rounded font-mono"
                       >
                         {field}
                         <button
@@ -359,18 +359,18 @@ export default function CategoriesPage() {
                 )}
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-[#E5E7EB]">
+              <div className="flex justify-end gap-3 pt-3 border-t border-brand-border">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium text-[#1F2937] hover:bg-slate-100 rounded-lg transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-foreground hover:bg-slate-100 rounded-lg transition-colors"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={modalSubmitting}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#1E3447] hover:bg-[#1E3447]/90 rounded-lg disabled:opacity-50 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary/90 rounded-lg disabled:opacity-50 transition-colors"
                 >
                   {modalSubmitting ? (
                     <>

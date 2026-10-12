@@ -175,12 +175,12 @@ export default function CreateProductPage() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Section 1: Informasi Dasar */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-[#1E3447]">Informasi Dasar</h2>
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-brand-primary">Informasi Dasar</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Nama Produk <span className="text-rose-500">*</span>
               </label>
               <input
@@ -189,7 +189,7 @@ export default function CreateProductPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Contoh: Vintage Denim Jacket Levis 501"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.name && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.name[0]}</p>
@@ -197,17 +197,17 @@ export default function CreateProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Kategori <span className="text-rose-500">*</span>
               </label>
               {loadingCategories ? (
-                <div className="h-10 bg-slate-100 rounded-lg animate-pulse" />
+                <div className="h-10 bg-background rounded-lg animate-pulse" />
               ) : (
                 <select
                   required
                   value={categoryId}
                   onChange={(e) => setCategoryId(Number(e.target.value))}
-                  className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm bg-white"
+                  className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-surface text-foreground"
                 >
                   <option value="" disabled>
                     Select Category
@@ -225,13 +225,13 @@ export default function CreateProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Merek / Brand</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Merek / Brand</label>
               <input
                 type="text"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 placeholder="Contoh: Levi's, Uniqlo, Nike"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.brand && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.brand[0]}</p>
@@ -239,13 +239,13 @@ export default function CreateProductPage() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Deskripsi</label>
               <textarea
                 rows={4}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Jelaskan detail bahan, kecacatan (jika ada), gaya, dll."
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.description && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.description[0]}</p>
@@ -255,12 +255,12 @@ export default function CreateProductPage() {
         </div>
 
         {/* Section 2: Harga & Kondisi */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold text-[#1E3447]">Harga & Kondisi</h2>
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-brand-primary">Harga & Kondisi</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Harga (Rp) <span className="text-rose-500">*</span>
               </label>
               <input
@@ -270,7 +270,7 @@ export default function CreateProductPage() {
                 value={price}
                 onChange={(e) => setPrice(e.target.value === "" ? "" : Number(e.target.value))}
                 placeholder="150000"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.price && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.price[0]}</p>
@@ -278,7 +278,7 @@ export default function CreateProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Ukuran (Size Label) <span className="text-rose-500">*</span>
               </label>
               <input
@@ -287,7 +287,7 @@ export default function CreateProductPage() {
                 value={sizeLabel}
                 onChange={(e) => setSizeLabel(e.target.value)}
                 placeholder="L, XL, 32, All Size"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.size_label && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.size_label[0]}</p>
@@ -295,13 +295,13 @@ export default function CreateProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">
+              <label className="block text-sm font-medium text-foreground mb-1">
                 Kondisi <span className="text-rose-500">*</span>
               </label>
               <select
                 value={condition}
                 onChange={(e) => setCondition(e.target.value as ConditionType)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm bg-white"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-surface text-foreground"
               >
                 <option value="like_new">Sangat Baik (Like New)</option>
                 <option value="good">Bagus (Good)</option>
@@ -313,11 +313,11 @@ export default function CreateProductPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Status Visibilitas</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Status Visibilitas</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as "available" | "hidden")}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm bg-white"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-surface text-foreground"
               >
                 <option value="available">Tersedia (Tampil di Publik)</option>
                 <option value="hidden">Tersembunyi (Draft)</option>
@@ -328,13 +328,13 @@ export default function CreateProductPage() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-[#1F2937] mb-1">Catatan Kondisi</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Catatan Kondisi</label>
               <input
                 type="text"
                 value={conditionNotes}
                 onChange={(e) => setConditionNotes(e.target.value)}
                 placeholder="Ada sedikit faded di bagian lengan kiri"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
               />
               {fieldErrors.condition_notes && (
                 <p className="text-xs text-rose-500 mt-1">{fieldErrors.condition_notes[0]}</p>
@@ -345,10 +345,10 @@ export default function CreateProductPage() {
 
         {/* Section 3: Ukuran Detail / Measurements (jika ada) */}
         {selectedCategory?.measurement_fields && selectedCategory.measurement_fields.length > 0 && (
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
+          <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
             <div>
-              <h2 className="text-lg font-semibold text-[#1E3447]">Dimensi / Ukuran Fisik (cm)</h2>
-              <p className="text-xs text-[#6B7280]">
+              <h2 className="text-lg font-semibold text-brand-primary">Dimensi / Ukuran Fisik (cm)</h2>
+              <p className="text-xs text-brand-muted">
                 Masukkan ukuran detail dalam centimeter sesuai spesifikasi kategori {selectedCategory.name}
               </p>
             </div>
@@ -356,7 +356,7 @@ export default function CreateProductPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {selectedCategory.measurement_fields.map((field) => (
                 <div key={field}>
-                  <label className="block text-xs font-medium text-[#1F2937] capitalize mb-1">
+                  <label className="block text-xs font-medium text-foreground capitalize mb-1">
                     {field.replace(/_/g, " ")} (cm)
                   </label>
                   <input
@@ -371,7 +371,7 @@ export default function CreateProductPage() {
                       })
                     }
                     placeholder="Contoh: 65"
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E3447]/20 text-sm"
+                    className="w-full px-3 py-2 border border-brand-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/20 text-sm bg-background text-foreground"
                   />
                 </div>
               ))}
@@ -383,10 +383,10 @@ export default function CreateProductPage() {
         )}
 
         {/* Section 4: Foto Produk */}
-        <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 space-y-4">
+        <div className="bg-surface border border-brand-border rounded-xl p-6 space-y-4">
           <div>
-            <h2 className="text-lg font-semibold text-[#1E3447]">Foto Produk</h2>
-            <p className="text-xs text-[#6B7280]">
+            <h2 className="text-lg font-semibold text-brand-primary">Foto Produk</h2>
+            <p className="text-xs text-brand-muted">
               Unggah gambar produk. Gambar pertama yang diunggah akan menjadi gambar utama. (Max 2MB per foto)
             </p>
           </div>
@@ -395,7 +395,7 @@ export default function CreateProductPage() {
             {imageFiles.map((item, idx) => (
               <div
                 key={idx}
-                className="relative aspect-square rounded-lg border border-[#E5E7EB] overflow-hidden group bg-slate-50"
+                className="relative aspect-square rounded-lg border border-brand-border overflow-hidden group bg-background"
               >
                 <img
                   src={item.preview}
@@ -411,16 +411,16 @@ export default function CreateProductPage() {
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
                 {idx === 0 && (
-                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-[#1E3447] text-white text-[10px] rounded font-medium">
+                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 bg-brand-primary text-white text-[10px] rounded font-medium">
                     Utama
                   </span>
                 )}
               </div>
             ))}
 
-            <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-[#E5E7EB] hover:border-[#1E3447] rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100/50 transition-colors">
-              <Upload className="w-6 h-6 text-[#6B7280] mb-1" />
-              <span className="text-xs text-[#6B7280] font-medium text-center px-2">
+            <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-brand-border hover:border-brand-primary rounded-lg cursor-pointer bg-background hover:bg-brand-border/50 transition-colors">
+              <Upload className="w-6 h-6 text-brand-muted mb-1" />
+              <span className="text-xs text-brand-muted font-medium text-center px-2">
                 Tambah Foto
               </span>
               <input
@@ -438,17 +438,17 @@ export default function CreateProductPage() {
         </div>
 
         {/* Bottom Actions */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E7EB]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-brand-border">
           <Link
             href="/admin/products"
-            className="px-4 py-2 text-sm font-medium text-[#1F2937] hover:bg-slate-100 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-medium text-foreground hover:bg-background rounded-lg transition-colors"
           >
             Batal
           </Link>
           <button
             type="submit"
             disabled={submitting}
-            className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-[#1E3447] hover:bg-[#1E3447]/90 rounded-lg disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary-hover rounded-lg disabled:opacity-50 transition-colors"
           >
             {submitting ? (
               <>

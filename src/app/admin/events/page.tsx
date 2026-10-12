@@ -81,7 +81,7 @@ export default function AdminEventsListPage() {
         actions={
           <Link
             href="/admin/events/create"
-            className="inline-flex items-center gap-2 bg-[#1E3447] hover:bg-[#162735] text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>Tambah Event Baru</span>
@@ -90,7 +90,7 @@ export default function AdminEventsListPage() {
       />
 
       {/* Filters Bar */}
-      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between shadow-2xs">
+      <div className="bg-surface border border-brand-border rounded-2xl p-4 flex flex-col md:flex-row gap-4 items-center justify-between shadow-2xs">
         {/* Search Input */}
         <div className="relative w-full md:w-80">
           <input
@@ -98,9 +98,9 @@ export default function AdminEventsListPage() {
             placeholder="Cari judul, lokasi, deskripsi..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg pl-9 pr-3 py-2 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none"
+            className="w-full bg-background text-foreground text-xs rounded-lg pl-9 pr-3 py-2 border border-brand-border focus:border-brand-primary focus:outline-none"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#9CA3AF]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-brand-muted" />
         </div>
 
         {/* Dropdown Filters */}
@@ -108,7 +108,7 @@ export default function AdminEventsListPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2 border border-[#E5E7EB] focus:outline-none font-medium"
+            className="bg-background text-foreground text-xs rounded-lg px-3 py-2 border border-brand-border focus:outline-none font-medium"
           >
             <option value="">Semua Status</option>
             <option value="published">Published</option>
@@ -119,7 +119,7 @@ export default function AdminEventsListPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2 border border-[#E5E7EB] focus:outline-none font-medium"
+            className="bg-background text-foreground text-xs rounded-lg px-3 py-2 border border-brand-border focus:outline-none font-medium"
           >
             <option value="">Semua Tanggal</option>
             <option value="upcoming">Upcoming Event</option>
@@ -129,27 +129,27 @@ export default function AdminEventsListPage() {
       </div>
 
       {/* Content Table / List */}
-      <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
+      <div className="bg-surface border border-brand-border rounded-2xl overflow-hidden shadow-2xs">
         {loading ? (
-          <div className="p-12 flex flex-col items-center justify-center text-[#6B7280]">
-            <Loader2 className="w-6 h-6 animate-spin text-[#1E3447] mb-2" />
+          <div className="p-12 flex flex-col items-center justify-center text-brand-muted">
+            <Loader2 className="w-6 h-6 animate-spin text-brand-primary mb-2" />
             <span className="text-xs font-medium">Memuat data event...</span>
           </div>
         ) : error ? (
           <div className="p-8 text-center text-red-600 text-xs">{error}</div>
         ) : events.length === 0 ? (
           <div className="p-12 text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-[#F8F7F4] border border-[#E5E7EB] flex items-center justify-center mx-auto text-[#6B7280]">
+            <div className="w-12 h-12 rounded-full bg-background border border-brand-border flex items-center justify-center mx-auto text-brand-muted">
               <Calendar className="w-6 h-6" />
             </div>
-            <p className="text-sm font-semibold text-[#1F2937]">Belum Ada Event</p>
-            <p className="text-xs text-[#6B7280] max-w-sm mx-auto">
+            <p className="text-sm font-semibold text-foreground">Belum Ada Event</p>
+            <p className="text-xs text-brand-muted max-w-sm mx-auto">
               Event yang kamu tambahkan akan tampil di daftar ini serta halaman publik dan homepage.
             </p>
             <div className="pt-2">
               <Link
                 href="/admin/events/create"
-                className="inline-flex items-center gap-2 bg-[#1E3447] text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-[#162735] transition-colors"
+                className="inline-flex items-center gap-2 bg-brand-primary text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-brand-primary-hover transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Tambah Event Pertama</span>
@@ -159,7 +159,7 @@ export default function AdminEventsListPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#F8F7F4] border-b border-[#E5E7EB] text-[#6B7280] font-semibold uppercase tracking-wider">
+              <thead className="bg-background border-b border-brand-border text-brand-muted font-semibold uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4">Cover</th>
                   <th className="py-3 px-4">Judul Acara</th>
@@ -170,12 +170,12 @@ export default function AdminEventsListPage() {
                   <th className="py-3 px-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E7EB] text-[#1F2937]">
+              <tbody className="divide-y divide-brand-border text-foreground">
                 {events.map((evt) => (
-                  <tr key={evt.id} className="hover:bg-[#F8F7F4]/50 transition-colors">
+                  <tr key={evt.id} className="hover:bg-background/50 transition-colors">
                     {/* Cover Preview */}
                     <td className="py-3 px-4">
-                      <div className="relative w-14 h-10 bg-[#F8F7F4] rounded-lg overflow-hidden border border-[#E5E7EB]">
+                      <div className="relative w-14 h-10 bg-background rounded-lg overflow-hidden border border-brand-border">
                         {evt.cover_image_thumbnail_url || evt.cover_image_url ? (
                           <Image
                             src={evt.cover_image_thumbnail_url || evt.cover_image_url!}
@@ -184,7 +184,7 @@ export default function AdminEventsListPage() {
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[#9CA3AF]">
+                          <div className="w-full h-full flex items-center justify-center text-brand-muted">
                             <Calendar className="w-4 h-4" />
                           </div>
                         )}
@@ -193,21 +193,21 @@ export default function AdminEventsListPage() {
 
                     {/* Title & Slug */}
                     <td className="py-3 px-4 font-medium max-w-xs">
-                      <p className="font-semibold text-[#1F2937] line-clamp-1">{evt.title}</p>
-                      <p className="text-[10px] text-[#6B7280] font-mono line-clamp-1">/{evt.slug}</p>
+                      <p className="font-semibold text-foreground line-clamp-1">{evt.title}</p>
+                      <p className="text-[10px] text-brand-muted font-mono line-clamp-1">/{evt.slug}</p>
                     </td>
 
                     {/* Date & Location */}
                     <td className="py-3 px-4">
-                      <p className="font-semibold text-[#1E3447]">
+                      <p className="font-semibold text-brand-primary">
                         {new Date(evt.event_date).toLocaleDateString("id-ID", {
                           day: "numeric",
                           month: "short",
                           year: "numeric",
                         })}
                       </p>
-                      <p className="text-[11px] text-[#6B7280] flex items-center gap-1">
-                        <MapPin className="w-3 h-3 shrink-0" />
+                      <p className="text-[11px] text-brand-muted flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
                         <span className="line-clamp-1">{evt.location}</span>
                       </p>
                     </td>
@@ -215,7 +215,7 @@ export default function AdminEventsListPage() {
                     {/* Status Badge */}
                     <td className="py-3 px-4">
                       {evt.status === "published" && (
-                        <span className="inline-flex items-center gap-1 bg-[#6B7F6B]/10 text-[#6B7F6B] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-[#6B7F6B]/20">
+                        <span className="inline-flex items-center gap-1 bg-brand-secondary/10 text-brand-secondary text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-brand-secondary/20">
                           Published
                         </span>
                       )}
@@ -234,11 +234,11 @@ export default function AdminEventsListPage() {
                     {/* Timing Badge */}
                     <td className="py-3 px-4">
                       {evt.is_upcoming ? (
-                        <span className="inline-flex items-center gap-1 bg-[#1E3447] text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
+                        <span className="inline-flex items-center gap-1 bg-brand-primary text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
                           Upcoming
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 bg-[#F8F7F4] text-[#6B7280] text-[10px] font-medium px-2.5 py-0.5 rounded-full border border-[#E5E7EB]">
+                        <span className="inline-flex items-center gap-1 bg-background text-brand-muted text-[10px] font-medium px-2.5 py-0.5 rounded-full border border-brand-border">
                           Past
                         </span>
                       )}
@@ -251,7 +251,7 @@ export default function AdminEventsListPage() {
                           <CheckCircle className="w-4 h-4" />
                         </span>
                       ) : (
-                        <span className="text-[#9CA3AF]">—</span>
+                        <span className="text-brand-muted">—</span>
                       )}
                     </td>
 
@@ -260,14 +260,14 @@ export default function AdminEventsListPage() {
                       <Link
                         href={`/events/${evt.slug}`}
                         target="_blank"
-                        className="p-1.5 text-[#6B7280] hover:text-[#1E3447] rounded-md transition-colors inline-block"
+                        className="p-1.5 text-brand-muted hover:text-brand-primary rounded-md transition-colors inline-block"
                         title="Lihat Halaman Publik"
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
                       <Link
                         href={`/admin/events/${evt.id}/edit`}
-                        className="p-1.5 text-[#6B7280] hover:text-[#1E3447] rounded-md transition-colors inline-block"
+                        className="p-1.5 text-brand-muted hover:text-brand-primary rounded-md transition-colors inline-block"
                         title="Edit Event"
                       >
                         <Edit className="w-4 h-4" />

@@ -30,7 +30,7 @@ export function WhatsAppButton({ product, className = "" }: WhatsAppButtonProps)
       href={waUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-full flex items-center justify-center gap-2.5 bg-brand-primary hover:bg-[#162735] text-white font-medium py-3.5 px-6 rounded-full shadow-md text-sm transition-all transform active:scale-95 ${className}`}
+      className={`w-full flex items-center justify-center gap-2.5 bg-brand-primary hover:bg-brand-primary-hover text-white font-medium py-3.5 px-6 rounded-full shadow-md text-sm transition-all transform active:scale-95 ${className}`}
     >
       <MessageSquare className="w-4 h-4" />
       <span>Tanya via WhatsApp</span>

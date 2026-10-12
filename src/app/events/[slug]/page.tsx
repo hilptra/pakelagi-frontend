@@ -70,13 +70,13 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   }
 
   return (
-    <div className="bg-[#F8F7F4] min-h-screen pb-20">
+    <div className="bg-background min-h-screen pb-20">
       {/* Top Breadcrumb Header */}
-      <div className="bg-white border-b border-[#E5E7EB] py-6">
+      <div className="bg-surface border-b border-brand-border py-6">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#6B7280] hover:text-[#1E3447] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-brand-muted hover:text-brand-primary transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Daftar Event</span>
@@ -87,7 +87,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10">
         {/* Cover Image Banner */}
         {event.cover_image_url && (
-          <div className="relative aspect-[21/9] w-full bg-white rounded-3xl overflow-hidden border border-[#E5E7EB] shadow-xs">
+          <div className="relative aspect-21/9 w-full bg-surface rounded-3xl overflow-hidden border border-brand-border shadow-xs">
             <Image
               src={event.cover_image_url}
               alt={event.title}
@@ -100,17 +100,17 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
         )}
 
         {/* Main Content Info */}
-        <div className="bg-white border border-[#E5E7EB] rounded-3xl p-6 sm:p-10 space-y-8 shadow-xs">
+        <div className="bg-surface border border-brand-border rounded-3xl p-6 sm:p-10 space-y-8 shadow-xs">
           
           {/* Header Metadata */}
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2">
               {event.is_upcoming ? (
-                <span className="bg-[#1E3447] text-white text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">
+                <span className="bg-brand-primary text-white text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">
                   Upcoming Event
                 </span>
               ) : (
-                <span className="bg-[#6B7F6B] text-white text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">
+                <span className="bg-brand-secondary text-white text-xs font-semibold px-3.5 py-1 rounded-full uppercase tracking-wider">
                   Past Event
                 </span>
               )}
@@ -122,34 +122,34 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-bold text-[#1F2937] leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-bold text-foreground leading-tight">
               {event.title}
             </h1>
 
             {/* Event Specs Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-[#E5E7EB]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-brand-border">
               <div className="flex items-start gap-3">
-                <Calendar className="w-5 h-5 text-[#6B7F6B] shrink-0 mt-0.5" />
+                <Calendar className="w-5 h-5 text-brand-secondary shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#6B7280]">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">
                     Waktu & Tanggal
                   </p>
-                  <p className="text-sm font-semibold text-[#1F2937]">
+                  <p className="text-sm font-semibold text-foreground">
                     {formattedDate}
                   </p>
-                  <p className="text-xs text-[#6B7280]">
+                  <p className="text-xs text-brand-muted">
                     {formattedTime} WIB {endDateStr ? ` - s/d ${endDateStr}` : ""}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#1E3447] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-[#6B7280]">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">
                     Lokasi
                   </p>
-                  <p className="text-sm font-semibold text-[#1F2937]">
+                  <p className="text-sm font-semibold text-foreground">
                     {event.location}
                   </p>
                 </div>
@@ -157,12 +157,12 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
               {event.organizer && (
                 <div className="flex items-start gap-3">
-                  <User className="w-5 h-5 text-[#6B7280] shrink-0 mt-0.5" />
+                  <User className="w-5 h-5 text-brand-muted shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-[#6B7280]">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">
                       Penyelenggara
                     </p>
-                    <p className="text-sm font-semibold text-[#1F2937]">
+                    <p className="text-sm font-semibold text-foreground">
                       {event.organizer}
                     </p>
                   </div>
@@ -172,19 +172,19 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
           </div>
 
           {/* Event Description Body */}
-          <div className="space-y-4 pt-6 border-t border-[#E5E7EB]">
-            <h2 className="text-lg font-bold text-[#1F2937]">Tentang Acara Ini</h2>
-            <div className="prose prose-slate max-w-none text-sm text-[#1F2937] leading-relaxed whitespace-pre-line">
+          <div className="space-y-4 pt-6 border-t border-brand-border">
+            <h2 className="text-lg font-bold text-foreground">Tentang Acara Ini</h2>
+            <div className="prose prose-slate max-w-none text-sm text-foreground leading-relaxed whitespace-pre-line">
               {event.description}
             </div>
           </div>
 
           {/* Documentation Gallery Section (if images exist) */}
           {event.images && event.images.length > 0 && (
-            <div className="space-y-4 pt-8 border-t border-[#E5E7EB]">
+            <div className="space-y-4 pt-8 border-t border-brand-border">
               <div className="flex items-center gap-2">
-                <ImageIcon className="w-5 h-5 text-[#1E3447]" />
-                <h2 className="text-lg font-bold text-[#1F2937]">
+                <ImageIcon className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-bold text-foreground">
                   Galeri & Dokumentasi Foto ({event.images.length})
                 </h2>
               </div>
@@ -193,7 +193,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 {event.images.map((img, idx) => (
                   <div
                     key={idx}
-                    className="group relative aspect-[4/3] bg-[#F8F7F4] rounded-2xl overflow-hidden border border-[#E5E7EB]"
+                    className="group relative aspect-4/3 bg-background rounded-2xl overflow-hidden border border-brand-border"
                   >
                     <Image
                       src={img.url}

@@ -57,8 +57,8 @@ export function Pagination({ meta }: PaginationProps) {
   };
 
   return (
-    <nav className="flex items-center justify-between border-t border-zinc-200 pt-6 mt-8 text-xs">
-      <div className="text-zinc-500 font-mono">
+    <nav className="flex items-center justify-between border-t border-brand-border pt-6 mt-8 text-xs">
+      <div className="text-brand-muted font-mono">
         Halaman {currentPage} dari {lastPage} ({meta.total} item)
       </div>
 
@@ -67,13 +67,13 @@ export function Pagination({ meta }: PaginationProps) {
         {currentPage > 1 ? (
           <Link
             href={createPageUrl(currentPage - 1)}
-            className="inline-flex items-center gap-1 px-3 py-1.5 border border-zinc-200 rounded-md text-zinc-700 hover:bg-zinc-100 transition-colors font-medium"
+            className="inline-flex items-center gap-1 px-3 py-1.5 border border-brand-border rounded-md text-foreground hover:bg-background transition-colors font-medium"
           >
             <ChevronLeft className="w-4 h-4" />
             <span className="hidden sm:inline">Sebelumnya</span>
           </Link>
         ) : (
-          <span className="inline-flex items-center gap-1 px-3 py-1.5 border border-zinc-200 rounded-md text-zinc-300 cursor-not-allowed">
+          <span className="inline-flex items-center gap-1 px-3 py-1.5 border border-brand-border rounded-md text-brand-muted/40 cursor-not-allowed">
             <ChevronLeft className="w-4 h-4" />
             <span className="hidden sm:inline">Sebelumnya</span>
           </span>
@@ -84,7 +84,7 @@ export function Pagination({ meta }: PaginationProps) {
           {getPageNumbers().map((page, idx) => {
             if (typeof page === "string") {
               return (
-                <span key={`dots-${idx}`} className="px-2 py-1 text-zinc-400">
+                <span key={`dots-${idx}`} className="px-2 py-1 text-brand-muted">
                   ...
                 </span>
               );
@@ -97,8 +97,8 @@ export function Pagination({ meta }: PaginationProps) {
                 href={createPageUrl(page)}
                 className={`min-w-8 h-8 flex items-center justify-center rounded-md font-mono text-xs transition-colors ${
                   isCurrent
-                    ? "bg-zinc-950 text-white font-bold"
-                    : "text-zinc-700 hover:bg-zinc-100 border border-transparent"
+                    ? "bg-brand-primary text-white font-bold"
+                    : "text-foreground hover:bg-background border border-transparent"
                 }`}
               >
                 {page}
@@ -111,13 +111,13 @@ export function Pagination({ meta }: PaginationProps) {
         {currentPage < lastPage ? (
           <Link
             href={createPageUrl(currentPage + 1)}
-            className="inline-flex items-center gap-1 px-3 py-1.5 border border-zinc-200 rounded-md text-zinc-700 hover:bg-zinc-100 transition-colors font-medium"
+            className="inline-flex items-center gap-1 px-3 py-1.5 border border-brand-border rounded-md text-foreground hover:bg-background transition-colors font-medium"
           >
             <span className="hidden sm:inline">Selanjutnya</span>
             <ChevronRight className="w-4 h-4" />
           </Link>
         ) : (
-          <span className="inline-flex items-center gap-1 px-3 py-1.5 border border-zinc-200 rounded-md text-zinc-300 cursor-not-allowed">
+          <span className="inline-flex items-center gap-1 px-3 py-1.5 border border-brand-border rounded-md text-brand-muted/40 cursor-not-allowed">
             <span className="hidden sm:inline">Selanjutnya</span>
             <ChevronRight className="w-4 h-4" />
           </span>
