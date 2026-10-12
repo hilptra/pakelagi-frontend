@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent, ChangeEvent, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "sonner";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import {
@@ -140,12 +141,13 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
       await updateAdminEvent(eventId, formData);
       await loadEvent();
-      alert("Event berhasil diperbarui!");
+      toast.success("Event berhasil diperbarui!");
     } catch (err: any) {
       if (err instanceof ApiError && err.errors) {
         setFieldErrors(err.errors);
       }
       setErrorMsg(err.message || "Gagal memperbarui event.");
+      toast.error(err.message || "Gagal memperbarui event.");
     } finally {
       setSaving(false);
     }
@@ -162,8 +164,9 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
       await uploadAdminEventImages(eventId, formData);
       await loadEvent();
+      toast.success("Foto dokumentasi berhasil diunggah!");
     } catch (err: any) {
-      alert(err.message || "Gagal mengunggah foto dokumentasi.");
+      toast.error(err.message || "Gagal mengunggah foto dokumentasi.");
     } finally {
       setUploadingDocs(false);
       e.target.value = "";
@@ -177,8 +180,9 @@ export default function EditEventPage({ params }: EditEventPageProps) {
       await deleteAdminEventImage(eventId, deleteImageTarget.id);
       setDeleteImageTarget(null);
       await loadEvent();
+      toast.success("Foto berhasil dihapus.");
     } catch (err: any) {
-      alert(err.message || "Gagal menghapus foto.");
+      toast.error(err.message || "Gagal menghapus foto.");
     } finally {
       setDeletingImage(false);
     }
@@ -186,8 +190,8 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
   if (loading) {
     return (
-      <div className="p-12 flex flex-col items-center justify-center text-[#6B7280]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#1E3447] mb-2" />
+      <div className="p-12 flex flex-col items-center justify-center text-brand-muted">
+        <Loader2 className="w-6 h-6 animate-spin text-brand-primary mb-2" />
         <span className="text-xs font-medium">Memuat event...</span>
       </div>
     );
@@ -205,7 +209,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
               <Link
                 href={`/events/${eventData.slug}`}
                 target="_blank"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-[#1E3447] bg-[#E7DCC8]/40 border border-[#E7DCC8] px-3.5 py-2 rounded-lg hover:bg-[#E7DCC8] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-brand-primary bg-brand-accent/40 border border-brand-accent px-3.5 py-2 rounded-lg hover:bg-brand-accent transition-colors"
               >
                 <Eye className="w-4 h-4" />
                 <span>Lihat Publik</span>
@@ -213,7 +217,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
             )}
             <Link
               href="/admin/events"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#6B7280] hover:text-[#1E3447] bg-white border border-[#E5E7EB] px-3.5 py-2 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-brand-muted hover:text-brand-primary bg-surface border border-brand-border px-3.5 py-2 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Kembali</span>
@@ -233,15 +237,15 @@ export default function EditEventPage({ params }: EditEventPageProps) {
       <form onSubmit={handleSubmit} className="space-y-6">
         
         {/* SECTION 1: EVENT INFORMATION */}
-        <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center gap-2 border-b border-[#E5E7EB] pb-3 text-[#1E3447]">
+        <div className="bg-surface border border-brand-border rounded-2xl p-6 space-y-4 shadow-2xs">
+          <div className="flex items-center gap-2 border-b border-brand-border pb-3 text-brand-primary">
             <FileText className="w-4 h-4" />
             <h2 className="text-sm font-bold uppercase tracking-wider">Event Information</h2>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+              <label className="block text-xs font-semibold text-foreground mb-1">
                 Judul Acara <span className="text-red-500">*</span>
               </label>
               <input
@@ -249,7 +253,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none"
+                className="w-full bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-brand-border focus:border-brand-primary focus:outline-none"
               />
               {fieldErrors.title && (
                 <p className="text-[11px] text-red-600 mt-1">{fieldErrors.title[0]}</p>
@@ -257,7 +261,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+              <label className="block text-xs font-semibold text-foreground mb-1">
                 Deskripsi Acara <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -265,7 +269,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                 rows={5}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg p-3 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none"
+                className="w-full bg-background text-foreground text-xs rounded-lg p-3 border border-brand-border focus:border-brand-primary focus:outline-none"
               />
               {fieldErrors.description && (
                 <p className="text-[11px] text-red-600 mt-1">{fieldErrors.description[0]}</p>
@@ -274,7 +278,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+                <label className="block text-xs font-semibold text-foreground mb-1">
                   Lokasi Acara <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -283,9 +287,9 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                     required
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg pl-9 pr-3 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none"
+                    className="w-full bg-background text-foreground text-xs rounded-lg pl-9 pr-3 py-2.5 border border-brand-border focus:border-brand-primary focus:outline-none"
                   />
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
                 </div>
                 {fieldErrors.location && (
                   <p className="text-[11px] text-red-600 mt-1">{fieldErrors.location[0]}</p>
@@ -293,7 +297,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+                <label className="block text-xs font-semibold text-foreground mb-1">
                   Penyelenggara / Kolaborator
                 </label>
                 <div className="relative">
@@ -301,9 +305,9 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                     type="text"
                     value={organizer}
                     onChange={(e) => setOrganizer(e.target.value)}
-                    className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg pl-9 pr-3 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none"
+                    className="w-full bg-background text-foreground text-xs rounded-lg pl-9 pr-3 py-2.5 border border-brand-border focus:border-brand-primary focus:outline-none"
                   />
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
                 </div>
                 {fieldErrors.organizer && (
                   <p className="text-[11px] text-red-600 mt-1">{fieldErrors.organizer[0]}</p>
@@ -314,15 +318,15 @@ export default function EditEventPage({ params }: EditEventPageProps) {
         </div>
 
         {/* SECTION 2: DATE & TIME */}
-        <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center gap-2 border-b border-[#E5E7EB] pb-3 text-[#1E3447]">
+        <div className="bg-surface border border-brand-border rounded-2xl p-6 space-y-4 shadow-2xs">
+          <div className="flex items-center gap-2 border-b border-brand-border pb-3 text-brand-primary">
             <Calendar className="w-4 h-4" />
             <h2 className="text-sm font-bold uppercase tracking-wider">Date & Time</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+              <label className="block text-xs font-semibold text-foreground mb-1">
                 Tanggal & Waktu Mulai <span className="text-red-500">*</span>
               </label>
               <input
@@ -330,7 +334,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                 required
                 value={eventDate}
                 onChange={(e) => setEventDate(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none font-mono"
+                className="w-full bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-brand-border focus:border-brand-primary focus:outline-none font-mono"
               />
               {fieldErrors.event_date && (
                 <p className="text-[11px] text-red-600 mt-1">{fieldErrors.event_date[0]}</p>
@@ -338,14 +342,14 @@ export default function EditEventPage({ params }: EditEventPageProps) {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+              <label className="block text-xs font-semibold text-foreground mb-1">
                 Tanggal & Waktu Selesai (Opsional)
               </label>
               <input
                 type="datetime-local"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2.5 border border-[#E5E7EB] focus:border-[#1E3447] focus:outline-none font-mono"
+                className="w-full bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-brand-border focus:border-brand-primary focus:outline-none font-mono"
               />
               {fieldErrors.end_date && (
                 <p className="text-[11px] text-red-600 mt-1">{fieldErrors.end_date[0]}</p>
@@ -355,15 +359,15 @@ export default function EditEventPage({ params }: EditEventPageProps) {
         </div>
 
         {/* SECTION 3: COVER IMAGE */}
-        <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center gap-2 border-b border-[#E5E7EB] pb-3 text-[#1E3447]">
+        <div className="bg-surface border border-brand-border rounded-2xl p-6 space-y-4 shadow-2xs">
+          <div className="flex items-center gap-2 border-b border-brand-border pb-3 text-brand-primary">
             <Upload className="w-4 h-4" />
             <h2 className="text-sm font-bold uppercase tracking-wider">Cover Image</h2>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start gap-4">
             {coverPreview ? (
-              <div className="relative aspect-[16/9] w-full sm:w-60 bg-[#F8F7F4] rounded-xl overflow-hidden border border-[#E5E7EB]">
+              <div className="relative aspect-video w-full sm:w-60 bg-background rounded-xl overflow-hidden border border-brand-border">
                 <Image
                   src={coverPreview}
                   alt="Cover preview"
@@ -372,14 +376,14 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                 />
               </div>
             ) : (
-              <div className="aspect-[16/9] w-full sm:w-60 bg-[#F8F7F4] rounded-xl border border-dashed border-[#E5E7EB] flex flex-col items-center justify-center text-[#9CA3AF]">
+              <div className="aspect-video w-full sm:w-60 bg-background rounded-xl border border-dashed border-brand-border flex flex-col items-center justify-center text-brand-muted">
                 <Upload className="w-6 h-6 mb-1" />
                 <span className="text-[11px]">Belum ada cover</span>
               </div>
             )}
 
             <div className="space-y-3">
-              <label className="inline-flex items-center gap-2 bg-[#F8F7F4] hover:bg-[#E5E7EB] text-[#1F2937] text-xs font-medium px-4 py-2 rounded-lg border border-[#E5E7EB] cursor-pointer transition-colors">
+              <label className="inline-flex items-center gap-2 bg-background hover:bg-brand-border text-foreground text-xs font-medium px-4 py-2 rounded-lg border border-brand-border cursor-pointer transition-colors">
                 <Upload className="w-3.5 h-3.5" />
                 <span>Ganti Cover Image</span>
                 <input
@@ -407,21 +411,21 @@ export default function EditEventPage({ params }: EditEventPageProps) {
         </div>
 
         {/* SECTION 4: PUBLISHING */}
-        <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center gap-2 border-b border-[#E5E7EB] pb-3 text-[#1E3447]">
+        <div className="bg-surface border border-brand-border rounded-2xl p-6 space-y-4 shadow-2xs">
+          <div className="flex items-center gap-2 border-b border-brand-border pb-3 text-brand-primary">
             <CheckCircle className="w-4 h-4" />
             <h2 className="text-sm font-bold uppercase tracking-wider">Publishing & Visibility</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-semibold text-[#1F2937] mb-1">
+              <label className="block text-xs font-semibold text-foreground mb-1">
                 Status Publikasi <span className="text-red-500">*</span>
               </label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as any)}
-                className="w-full bg-[#F8F7F4] text-[#1F2937] text-xs rounded-lg px-3 py-2.5 border border-[#E5E7EB] focus:outline-none font-semibold"
+                className="w-full bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-brand-border focus:outline-none font-semibold"
               >
                 <option value="draft">Draft (Hanya terlihat di admin)</option>
                 <option value="published">Published (Tampil di publik)</option>
@@ -435,11 +439,11 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                   type="checkbox"
                   checked={showOnHomepage}
                   onChange={(e) => setShowOnHomepage(e.target.checked)}
-                  className="w-4 h-4 rounded text-[#1E3447] focus:ring-[#1E3447] border-[#E5E7EB]"
+                  className="w-4 h-4 rounded text-brand-primary focus:ring-brand-primary border-brand-border"
                 />
                 <div>
-                  <p className="text-xs font-semibold text-[#1F2937]">Tampilkan di Homepage</p>
-                  <p className="text-[11px] text-[#6B7280]">
+                  <p className="text-xs font-semibold text-foreground">Tampilkan di Homepage</p>
+                  <p className="text-[11px] text-brand-muted">
                     Tampilkan di section Upcoming Events pada beranda jika status published.
                   </p>
                 </div>
@@ -453,7 +457,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 bg-[#1E3447] hover:bg-[#162735] text-white text-xs font-semibold px-6 py-2.5 rounded-lg transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-semibold px-6 py-2.5 rounded-lg transition-colors disabled:opacity-50"
           >
             {saving ? (
               <>
@@ -468,16 +472,16 @@ export default function EditEventPage({ params }: EditEventPageProps) {
       </form>
 
       {/* SECTION 5: DOCUMENTATION GALLERY MANAGEMENT */}
-      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 space-y-6 shadow-2xs">
-        <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3">
-          <div className="flex items-center gap-2 text-[#1E3447]">
+      <div className="bg-surface border border-brand-border rounded-2xl p-6 space-y-6 shadow-2xs">
+        <div className="flex items-center justify-between border-b border-brand-border pb-3">
+          <div className="flex items-center gap-2 text-brand-primary">
             <ImageIcon className="w-4 h-4" />
             <h2 className="text-sm font-bold uppercase tracking-wider">
               Dokumentasi Foto Galeri ({eventData?.images?.length || 0})
             </h2>
           </div>
 
-          <label className="inline-flex items-center gap-2 bg-[#1E3447] hover:bg-[#162735] text-white text-xs font-semibold px-4 py-2 rounded-lg cursor-pointer transition-colors disabled:opacity-50">
+          <label className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-semibold px-4 py-2 rounded-lg cursor-pointer transition-colors disabled:opacity-50">
             {uploadingDocs ? (
               <>
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -505,7 +509,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
             {eventData.images.map((img) => (
               <div
                 key={img.id}
-                className="group relative aspect-[4/3] bg-[#F8F7F4] rounded-xl overflow-hidden border border-[#E5E7EB]"
+                className="group relative aspect-4/3 bg-background rounded-xl overflow-hidden border border-brand-border"
               >
                 <Image
                   src={img.thumbnail_url || img.url}
@@ -527,7 +531,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
             ))}
           </div>
         ) : (
-          <div className="p-8 text-center bg-[#F8F7F4] border border-dashed border-[#E5E7EB] rounded-xl text-[#6B7280] text-xs">
+          <div className="p-8 text-center bg-background border border-dashed border-brand-border rounded-xl text-brand-muted text-xs">
             Belum ada foto dokumentasi untuk event ini. Klik tombol di atas untuk mengunggah foto suasana acara/booth.
           </div>
         )}

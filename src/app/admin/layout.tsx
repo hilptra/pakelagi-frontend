@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { getAdminProfile, logoutAdmin, type AdminUser } from "@/services/auth-service";
 import { Menu, LogOut } from "lucide-react";
+import { Toaster } from "sonner";
 
 export default function AdminLayout({
   children,
@@ -60,8 +61,9 @@ export default function AdminLayout({
   // ── Login page: standalone, no sidebar ──────────────────────────────
   if (isLoginPage) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#F8F7F4] text-[#1F2937]">
+      <div className="light min-h-screen flex flex-col bg-background text-foreground" style={{ colorScheme: "light" }}>
         <main className="flex-1 flex flex-col">{children}</main>
+        <Toaster position="top-center" richColors />
       </div>
     );
   }
@@ -69,10 +71,10 @@ export default function AdminLayout({
   // ── Checking auth ───────────────────────────────────────────────────
   if (isCheckingAuth || !admin) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8F7F4]">
+      <div className="light min-h-screen flex items-center justify-center bg-background" style={{ colorScheme: "light" }}>
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-[#1E3447] border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-medium text-[#6B7280]">
+          <div className="w-8 h-8 border-3 border-brand-primary border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs font-medium text-brand-muted">
             Memeriksa sesi admin...
           </span>
         </div>
@@ -82,7 +84,7 @@ export default function AdminLayout({
 
   // ── Authenticated layout ────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#F8F7F4] text-[#1F2937]">
+    <div className="light min-h-screen bg-background text-foreground" style={{ colorScheme: "light" }}>
       <AdminSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -90,10 +92,10 @@ export default function AdminLayout({
 
       <div className="lg:pl-60 flex flex-col min-h-screen">
         {/* Top bar */}
-        <header className="sticky top-0 z-20 h-14 bg-white border-b border-[#E5E7EB] flex items-center justify-between px-4 lg:px-6 shrink-0">
+        <header className="sticky top-0 z-20 h-14 bg-surface border-b border-brand-border flex items-center justify-between px-4 lg:px-6 shrink-0">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden p-2 -ml-2 text-[#6B7280] hover:text-[#1F2937] rounded-lg"
+            className="lg:hidden p-2 -ml-2 text-brand-muted hover:text-foreground rounded-lg"
             aria-label="Buka menu"
           >
             <Menu className="w-5 h-5" />
@@ -103,16 +105,16 @@ export default function AdminLayout({
 
           <div className="flex items-center gap-3">
             <div className="text-right hidden sm:block">
-              <p className="text-xs font-semibold text-[#1F2937] leading-tight">
+              <p className="text-xs font-semibold text-foreground leading-tight">
                 {admin.name}
               </p>
-              <p className="text-[10px] text-[#6B7280] leading-tight">
+              <p className="text-[10px] text-brand-muted leading-tight">
                 {admin.email}
               </p>
             </div>
             <button
               onClick={handleLogout}
-              className="p-2 text-[#6B7280] hover:text-red-600 rounded-lg transition-colors"
+              className="p-2 text-brand-muted hover:text-red-600 rounded-lg transition-colors"
               title="Keluar"
               aria-label="Keluar"
             >
@@ -122,8 +124,10 @@ export default function AdminLayout({
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 lg:p-6">{children}</main>
+        <main className="flex-1 p-4 sm:p-5 lg:p-6">{children}</main>
       </div>
+
+      <Toaster position="top-center" richColors />
     </div>
   );
 }
