@@ -3,7 +3,35 @@
 :root {
   --background: #F8F7F4;
   --foreground: #1F2937;
+  --surface: #FFFFFF;
   --primary: #1E3447;
+  --secondary: #6B7F6B;
+  --accent: #E7DCC8;
+  --text-muted: #6B7280;
+  --border: #E5E7EB;
+  --success: #A7BFA7;
+  --primary-hover: #162735;
+}
+
+.dark {
+  --background: #11161C;
+  --foreground: #F3F4F6;
+  --surface: #1A2129;
+  --primary: #4A7BA6;
+  --secondary: #8FAE8F;
+  --accent: #3A3426;
+  --text-muted: #9CA3AF;
+  --border: #2A333D;
+  --success: #6E9B6E;
+  --primary-hover: #6B9BC3;
+}
+
+.light {
+  --background: #F8F7F4;
+  --foreground: #1F2937;
+  --surface: #FFFFFF;
+  --primary: #1E3447;
+  --primary-hover: #162735;
   --secondary: #6B7F6B;
   --accent: #E7DCC8;
   --text-muted: #6B7280;
@@ -14,20 +42,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-primary: #1E3447;
-  --color-brand-secondary: #6B7F6B;
-  --color-brand-accent: #E7DCC8;
-  --color-brand-muted: #6B7280;
-  --color-brand-border: #E5E7EB;
-  --color-brand-success: #A7BFA7;
+  --color-surface: var(--surface);
+  --color-brand-primary: var(--primary);
+  --color-brand-primary-hover: var(--primary-hover);
+  --color-brand-secondary: var(--secondary);
+  --color-brand-accent: var(--accent);
+  --color-brand-muted: var(--text-muted);
+  --color-brand-border: var(--border);
+  --color-brand-success: var(--success);
   --font-sans: var(--font-poppins), sans-serif;
 }
 
 html, body {
-  background-color: #F8F7F4;
-  color: #1F2937;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-poppins), system-ui, sans-serif;
-  color-scheme: light;
 }
 
 /* Typography styles based on Brand Guidelines */
