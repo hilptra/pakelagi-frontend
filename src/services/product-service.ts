@@ -7,7 +7,7 @@ import {
   SingleApiResponse,
 } from "@/types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import { getApiBaseUrl } from "@/lib/api-url";
 
 export async function getProducts(
   params?: ProductFilterParams
@@ -31,7 +31,7 @@ export async function getProducts(
   }
 
   const queryString = query.toString();
-  const url = `${API_URL}/products${queryString ? `?${queryString}` : ""}`;
+  const url = `${getApiBaseUrl()}/products${queryString ? `?${queryString}` : ""}`;
 
   const res = await fetch(url, {
     headers: {
@@ -50,7 +50,7 @@ export async function getProducts(
 export async function getProductBySlug(
   slug: string
 ): Promise<ProductDetail> {
-  const url = `${API_URL}/products/${encodeURIComponent(slug)}`;
+  const url = `${getApiBaseUrl()}/products/${encodeURIComponent(slug)}`;
 
   const res = await fetch(url, {
     headers: {
@@ -72,7 +72,7 @@ export async function getProductBySlug(
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const url = `${API_URL}/categories`;
+  const url = `${getApiBaseUrl()}/categories`;
 
   const res = await fetch(url, {
     headers: {

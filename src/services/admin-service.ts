@@ -1,7 +1,7 @@
 import { ProductFilterParams, ProductListItem, SingleApiResponse, PaginatedApiResponse } from "@/types";
 import { ensureCsrfToken } from "./auth-service";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import { getApiBaseUrl } from "@/lib/api-url";
 
 export interface AdminProductItem extends ProductListItem {
   id?: number;
@@ -24,7 +24,7 @@ export async function getAdminProducts(
   }
 
   const queryString = query.toString();
-  const url = `${API_URL}/admin/products${queryString ? `?${queryString}` : ""}`;
+  const url = `${getApiBaseUrl()}/admin/products${queryString ? `?${queryString}` : ""}`;
 
   const res = await fetch(url, {
     headers: {
@@ -43,7 +43,7 @@ export async function getAdminProducts(
 
 export async function markAdminProductSold(slugOrId: string | number): Promise<AdminProductItem> {
   const csrfToken = await ensureCsrfToken();
-  const url = `${API_URL}/admin/products/${slugOrId}/sold`;
+  const url = `${getApiBaseUrl()}/admin/products/${slugOrId}/sold`;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -70,7 +70,7 @@ export async function updateAdminProductStatus(
   status: "available" | "hidden" | "sold"
 ): Promise<AdminProductItem> {
   const csrfToken = await ensureCsrfToken();
-  const url = `${API_URL}/admin/products/${slugOrId}/status`;
+  const url = `${getApiBaseUrl()}/admin/products/${slugOrId}/status`;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -95,7 +95,7 @@ export async function updateAdminProductStatus(
 
 export async function deleteAdminProduct(slugOrId: string | number): Promise<void> {
   const csrfToken = await ensureCsrfToken();
-  const url = `${API_URL}/admin/products/${slugOrId}`;
+  const url = `${getApiBaseUrl()}/admin/products/${slugOrId}`;
 
   const headers: Record<string, string> = {
     Accept: "application/json",

@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import { getApiBaseUrl, getSanctumBaseUrl } from "@/lib/api-url";
 
 export interface AdminUser {
   name: string;
@@ -24,7 +24,7 @@ export async function ensureCsrfToken(): Promise<string | null> {
   if (typeof window === "undefined") return null;
   
   try {
-    const baseUrl = API_URL.replace(/\/api\/v1\/?$/, "");
+    const baseUrl = getSanctumBaseUrl();
     await fetch(`${baseUrl}/sanctum/csrf-cookie`, {
       method: "GET",
       credentials: "include",
@@ -40,7 +40,7 @@ export async function ensureCsrfToken(): Promise<string | null> {
 export async function loginAdmin(email: string, password: string): Promise<AdminUser> {
   const csrfToken = await ensureCsrfToken();
 
-  const url = `${API_URL}/auth/login`;
+  const url = `${getApiBaseUrl()}/auth/login`;
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -58,9 +58,10 @@ export async function loginAdmin(email: string, password: string): Promise<Admin
       credentials: "include",
       body: JSON.stringify({ email, password }),
     });
-  } catch (err) {
+  } catch {
+    const target = getSanctumBaseUrl() || (typeof window !== "undefined" ? window.location.origin : "");
     throw new Error(
-      "Gagal terhubung ke server API (http://localhost:8000). Pastikan backend Laravel sedang berjalan."
+      `Gagal terhubung ke server API (${target}). Pastikan backend Laravel sedang berjalan.`
     );
   }
 
@@ -77,7 +78,7 @@ export async function loginAdmin(email: string, password: string): Promise<Admin
 export async function logoutAdmin(): Promise<void> {
   const csrfToken = await ensureCsrfToken();
 
-  const url = `${API_URL}/auth/logout`;
+  const url = `${getApiBaseUrl()}/auth/logout`;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -98,7 +99,7 @@ export async function logoutAdmin(): Promise<void> {
 }
 
 export async function getAdminProfile(): Promise<AdminUser | null> {
-  const url = `${API_URL}/auth/me`;
+  const url = `${getApiBaseUrl()}/auth/me`;
 
   try {
     const res = await fetch(url, {

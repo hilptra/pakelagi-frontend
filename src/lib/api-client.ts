@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import { getApiBaseUrl, getSanctumBaseUrl } from "./api-url";
 
 function getCookie(name: string): string | null {
   if (typeof document === "undefined") return null;
@@ -14,7 +14,7 @@ function getCookie(name: string): string | null {
 async function getCsrfToken(): Promise<string | null> {
   if (typeof window === "undefined") return null;
   try {
-    const baseUrl = API_URL.replace(/\/api\/v1\/?$/, "");
+    const baseUrl = getSanctumBaseUrl();
     await fetch(`${baseUrl}/sanctum/csrf-cookie`, {
       method: "GET",
       credentials: "include",
@@ -84,7 +84,7 @@ export function buildQueryString(params: Record<string, string | number | undefi
 
 export async function apiGet<T>(path: string): Promise<T> {
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       headers: { Accept: "application/json" },
       credentials: "include",
       cache: "no-store",
@@ -102,7 +102,7 @@ export async function apiGet<T>(path: string): Promise<T> {
 export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
   const csrfToken = await getCsrfToken();
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       method: "POST",
       headers: buildHeaders(csrfToken, "application/json"),
       credentials: "include",
@@ -121,7 +121,7 @@ export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
 export async function apiPut<T>(path: string, body: unknown): Promise<T> {
   const csrfToken = await getCsrfToken();
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       method: "PUT",
       headers: buildHeaders(csrfToken, "application/json"),
       credentials: "include",
@@ -140,7 +140,7 @@ export async function apiPut<T>(path: string, body: unknown): Promise<T> {
 export async function apiPatch<T>(path: string, body: unknown): Promise<T> {
   const csrfToken = await getCsrfToken();
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       method: "PATCH",
       headers: buildHeaders(csrfToken, "application/json"),
       credentials: "include",
@@ -159,7 +159,7 @@ export async function apiPatch<T>(path: string, body: unknown): Promise<T> {
 export async function apiDelete(path: string): Promise<void> {
   const csrfToken = await getCsrfToken();
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       method: "DELETE",
       headers: buildHeaders(csrfToken),
       credentials: "include",
@@ -187,7 +187,7 @@ export async function apiPostFormData<T>(path: string, formData: FormData): Prom
   if (csrfToken) headers["X-XSRF-TOKEN"] = csrfToken;
 
   try {
-    const res = await fetch(`${API_URL}${path}`, {
+    const res = await fetch(`${getApiBaseUrl()}${path}`, {
       method: "POST",
       headers,
       credentials: "include",
