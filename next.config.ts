@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
 const PROD_API_HOSTNAME = process.env.NEXT_PUBLIC_API_HOSTNAME || "api.pakelagi.com";
+const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "uvpyq71l";
 const BACKEND_ORIGIN = (
   process.env.API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
@@ -18,13 +19,19 @@ const nextConfig: NextConfig = {
       ? [
           { protocol: "http", hostname: "127.0.0.1", port: "8000", pathname: "/storage/**" },
           { protocol: "http", hostname: "localhost", port: "8000", pathname: "/storage/**" },
-          { protocol: "https", hostname: "res.cloudinary.com" },
-          { protocol: "https", hostname: "images.unsplash.com" },
+          {
+            protocol: "https",
+            hostname: "res.cloudinary.com",
+            pathname: `/${CLOUDINARY_CLOUD_NAME}/image/upload/**`,
+          },
         ]
       : [
           { protocol: "https", hostname: PROD_API_HOSTNAME, pathname: "/storage/**" },
-          { protocol: "https", hostname: "res.cloudinary.com" },
-          { protocol: "https", hostname: "images.unsplash.com" },
+          {
+            protocol: "https",
+            hostname: "res.cloudinary.com",
+            pathname: `/${CLOUDINARY_CLOUD_NAME}/image/upload/**`,
+          },
         ],
   },
   async rewrites() {
