@@ -10,7 +10,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const imageUrl = product.primary_image?.url || product.primary_image?.thumbnail_url || null;
+  const imageUrl = product.primary_image?.thumbnail_url || product.primary_image?.url || null;
   const isSold = product.status === "sold";
 
   return (

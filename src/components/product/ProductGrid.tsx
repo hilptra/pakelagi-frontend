@@ -8,6 +8,7 @@ interface ProductGridProps {
   emptyTitle?: string;
   emptyDescription?: string;
   onResetFilters?: () => void;
+  prioritizeFirstRow?: boolean;
 }
 
 export function ProductGrid({
@@ -15,6 +16,7 @@ export function ProductGrid({
   emptyTitle = "Belum ada produk yang ditemukan",
   emptyDescription = "Coba ubah kata kunci pencarian atau reset filter untuk melihat koleksi lainnya.",
   onResetFilters,
+  prioritizeFirstRow = true,
 }: ProductGridProps) {
   if (products.length === 0) {
     return (
@@ -54,7 +56,7 @@ export function ProductGrid({
         <ProductCard
           key={product.slug}
           product={product}
-          priority={index < 4}
+          priority={prioritizeFirstRow && index < 4}
         />
       ))}
     </div>

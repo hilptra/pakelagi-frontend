@@ -196,7 +196,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                     className="group relative aspect-4/3 bg-background rounded-2xl overflow-hidden border border-brand-border"
                   >
                     <Image
-                      src={img.url}
+                      src={img.thumbnail_url || img.url}
                       alt={img.caption || `Dokumentasi ${event.title}`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"

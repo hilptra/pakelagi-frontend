@@ -26,6 +26,7 @@ function RecentProductsSection({ products }: { products: ProductListItem[] | nul
       products={products}
       emptyTitle="Belum Ada Produk Tersedia"
       emptyDescription="Koleksi produk terbaru sedang disiapkan. Silakan cek kembali nanti."
+      prioritizeFirstRow={false}
     />
   );
 }

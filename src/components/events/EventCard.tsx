@@ -9,6 +9,10 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, featured = false }: EventCardProps) {
+  const coverImageUrl = featured
+    ? event.cover_image_url || event.cover_image_thumbnail_url
+    : event.cover_image_thumbnail_url || event.cover_image_url;
+
   // Format dates cleanly in Indonesian
   const startDate = new Date(event.event_date);
   const formattedDate = new Intl.DateTimeFormat("id-ID", {
@@ -36,9 +40,9 @@ export function EventCard({ event, featured = false }: EventCardProps) {
           featured ? "md:col-span-6 md:h-full md:aspect-auto min-h-60" : ""
         }`}
       >
-        {event.cover_image_url ? (
+        {coverImageUrl ? (
           <Image
-            src={event.cover_image_url}
+            src={coverImageUrl}
             alt={event.title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
