@@ -372,6 +372,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                   src={coverPreview}
                   alt="Cover preview"
                   fill
+                  sizes="(max-width: 640px) 100vw, 240px"
                   className="object-cover"
                 />
               </div>
@@ -515,6 +516,7 @@ export default function EditEventPage({ params }: EditEventPageProps) {
                   src={img.thumbnail_url || img.url}
                   alt={img.caption || "Dokumentasi event"}
                   fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
                   className="object-cover"
                 />
 

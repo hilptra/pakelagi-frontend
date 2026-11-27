@@ -234,7 +234,7 @@ export default function ProductDetailPage() {
                     }`}
                   >
                     <img
-                      src={img.url}
+                      src={img.thumbnail_url || img.url}
                       alt="Thumbnail"
                       className="w-full h-full object-cover"
                     />

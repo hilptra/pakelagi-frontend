@@ -181,6 +181,7 @@ export default function AdminEventsListPage() {
                             src={evt.cover_image_thumbnail_url || evt.cover_image_url!}
                             alt={evt.title}
                             fill
+                            sizes="56px"
                             className="object-cover"
                           />
                         ) : (

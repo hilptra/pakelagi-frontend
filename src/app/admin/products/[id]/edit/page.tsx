@@ -442,7 +442,7 @@ export default function EditProductPage() {
                 className="relative aspect-square rounded-lg border border-brand-border overflow-hidden group bg-background"
               >
                 <img
-                  src={img.url}
+                  src={img.thumbnail_url || img.url}
                   alt="Product Image"
                   className="w-full h-full object-cover"
                 />

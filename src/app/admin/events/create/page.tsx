@@ -257,6 +257,7 @@ export default function CreateEventPage() {
                     src={coverPreview}
                     alt="Cover preview"
                     fill
+                    sizes="(max-width: 640px) 100vw, 240px"
                     className="object-cover"
                   />
                 </div>
