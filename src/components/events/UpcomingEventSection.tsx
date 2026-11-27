@@ -5,17 +5,23 @@ import { Calendar, ArrowRight } from "lucide-react";
 
 import type { EventListItem } from "@/types/event";
 
-export async function UpcomingEventSection() {
-  let events: EventListItem[] = [];
-  try {
-    const res = await getEvents({
-      type: "upcoming",
-      homepage: true,
-      per_page: 3,
-    });
-    events = res.data;
-  } catch {
-    events = [];
+interface UpcomingEventSectionProps {
+  events?: EventListItem[];
+}
+
+export async function UpcomingEventSection({ events: prefetchedEvents }: UpcomingEventSectionProps = {}) {
+  let events: EventListItem[] = prefetchedEvents ?? [];
+  if (prefetchedEvents === undefined) {
+    try {
+      const res = await getEvents({
+        type: "upcoming",
+        homepage: true,
+        per_page: 3,
+      });
+      events = res.data;
+    } catch {
+      events = [];
+    }
   }
 
   // If no upcoming events are scheduled for homepage display, render nothing

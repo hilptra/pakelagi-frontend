@@ -37,7 +37,7 @@ export async function getProducts(
     headers: {
       Accept: "application/json",
     },
-    cache: "no-store",
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) {
@@ -78,7 +78,7 @@ export async function getCategories(): Promise<Category[]> {
     headers: {
       Accept: "application/json",
     },
-    cache: "no-store",
+    next: { revalidate: 300 },
   });
 
   if (!res.ok) {

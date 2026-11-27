@@ -28,11 +28,15 @@ export async function getEvents(
     per_page: filters?.per_page,
     page: filters?.page,
   });
-  return apiGet<PaginatedApiResponse<EventListItem>>(`/events${query}`);
+  return apiGet<PaginatedApiResponse<EventListItem>>(`/events${query}`, {
+    revalidate: 60,
+  });
 }
 
 export async function getEventBySlug(slug: string): Promise<EventDetail> {
-  const res = await apiGet<SingleApiResponse<EventDetail>>(`/events/${slug}`);
+  const res = await apiGet<SingleApiResponse<EventDetail>>(`/events/${slug}`, {
+    revalidate: 60,
+  });
   return res.data;
 }
 

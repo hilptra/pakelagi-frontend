@@ -5,18 +5,24 @@ import { Images, ArrowRight } from "lucide-react";
 
 import type { EventListItem } from "@/types/event";
 
-export async function PastEventSection() {
-  let events: EventListItem[] = [];
-  try {
-    const res = await getEvents({
-      type: "past",
-      homepage: true,
-      per_page: 3,
-      sort: "date_desc",
-    });
-    events = res.data;
-  } catch {
-    events = [];
+interface PastEventSectionProps {
+  events?: EventListItem[];
+}
+
+export async function PastEventSection({ events: prefetchedEvents }: PastEventSectionProps = {}) {
+  let events: EventListItem[] = prefetchedEvents ?? [];
+  if (prefetchedEvents === undefined) {
+    try {
+      const res = await getEvents({
+        type: "past",
+        homepage: true,
+        per_page: 3,
+        sort: "date_desc",
+      });
+      events = res.data;
+    } catch {
+      events = [];
+    }
   }
 
   // Kalau tidak ada event lewat yang ditandai homepage, jangan render apa-apa

@@ -1,26 +1,18 @@
 import Link from "next/link";
 import { getCategories, getProducts } from "@/services/product-service";
+import { getEvents } from "@/services/event-service";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { HeroProductCarousel } from "@/components/product/HeroProductCarousel";
 import { HeroWhatsAppButton } from "@/components/home/HeroWhatsAppButton";
 import { ArrowRight, MessageSquare, ShieldCheck, Shirt } from "lucide-react";
-import { Suspense } from "react";
-import { ProductGridSkeleton } from "@/components/ui/Skeleton";
 import { PakeLagiLogo } from "@/components/ui/PakeLagiLogo";
 import { UpcomingEventSection } from "@/components/events/UpcomingEventSection";
 import { PastEventSection } from "@/components/events/PastEventSection";
+import type { ProductListItem } from "@/types";
 
 export const revalidate = 60; // ISR 60s
 
-async function RecentProductsSection() {
-  let products = null;
-  try {
-    const res = await getProducts({ per_page: 8, sort: "newest" });
-    products = res.data;
-  } catch {
-    products = null;
-  }
-
+function RecentProductsSection({ products }: { products: ProductListItem[] | null }) {
   if (!products) {
     return (
       <div className="p-8 text-center border border-brand-border rounded-2xl bg-surface text-brand-muted text-xs">
@@ -39,10 +31,17 @@ async function RecentProductsSection() {
 }
 
 export default async function HomePage() {
-  const categories = await getCategories().catch(() => []);
-  const heroProducts = await getProducts({ per_page: 5, sort: "newest" })
-    .then((res) => res.data)
-    .catch(() => []);
+  const [categories, latestProductsRes, upcomingEventsRes, pastEventsRes] = await Promise.all([
+    getCategories().catch(() => []),
+    getProducts({ per_page: 8, sort: "newest" }).catch(() => null),
+    getEvents({ type: "upcoming", homepage: true, per_page: 3 }).catch(() => null),
+    getEvents({ type: "past", homepage: true, per_page: 3, sort: "date_desc" }).catch(() => null),
+  ]);
+
+  const recentProducts = latestProductsRes ? latestProductsRes.data : null;
+  const heroProducts = recentProducts ? recentProducts.slice(0, 5) : [];
+  const upcomingEvents = upcomingEventsRes ? upcomingEventsRes.data : [];
+  const pastEvents = pastEventsRes ? pastEventsRes.data : [];
 
   return (
     <div className="flex flex-col gap-16 pb-20 bg-background">
@@ -170,9 +169,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <Suspense fallback={<ProductGridSkeleton count={8} />}>
-            <RecentProductsSection />
-          </Suspense>
+          <RecentProductsSection products={recentProducts} />
         </div>
       </section>
 
@@ -226,10 +223,10 @@ export default async function HomePage() {
       </section>
 
       {/* Upcoming Events Editorial Section */}
-      <UpcomingEventSection />
+      <UpcomingEventSection events={upcomingEvents} />
 
       {/* Past Events Section - Showing Only 3 Recent Events (if any) */}
-      <PastEventSection />
+      <PastEventSection events={pastEvents} />
 
     </div>
   );

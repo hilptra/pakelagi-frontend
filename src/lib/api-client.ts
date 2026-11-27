@@ -82,12 +82,19 @@ export function buildQueryString(params: Record<string, string | number | undefi
 
 // ─── HTTP verbs ─────────────────────────────────────────────────────
 
-export async function apiGet<T>(path: string): Promise<T> {
+export interface ApiGetOptions {
+  revalidate?: number;
+}
+
+export async function apiGet<T>(path: string, options?: ApiGetOptions): Promise<T> {
+  const isRevalidated = typeof options?.revalidate === "number";
+
   try {
     const res = await fetch(`${getApiBaseUrl()}${path}`, {
       headers: { Accept: "application/json" },
-      credentials: "include",
-      cache: "no-store",
+      ...(isRevalidated
+        ? { next: { revalidate: options.revalidate } }
+        : { credentials: "include", cache: "no-store" }),
     });
     return await handleResponse<T>(res);
   } catch (err) {
