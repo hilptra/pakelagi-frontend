@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PakeLagiLogo } from "@/components/ui/PakeLagiLogo";
-import { LayoutDashboard, Package, Tag, ExternalLink, X, Calendar } from "lucide-react";
+import { LayoutDashboard, Package, Tag, ExternalLink, X, Calendar, MessageSquare } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -32,6 +32,12 @@ const sidebarNav: SidebarEntry[] = [
       { label: "Produk", href: "/admin/products", icon: Package },
       { label: "Kategori", href: "/admin/categories", icon: Tag },
       { label: "Events / Acara", href: "/admin/events", icon: Calendar },
+    ],
+  },
+  {
+    group: "Pengaturan Website",
+    items: [
+      { label: "WhatsApp Admin", href: "/admin/settings/whatsapp", icon: MessageSquare },
     ],
   },
 ];

@@ -8,6 +8,7 @@ import { Category } from "@/types";
 import { getCategories } from "@/services/product-service";
 import { PakeLagiLogo } from "@/components/ui/PakeLagiLogo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { useSettings } from "@/contexts/SettingsContext";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -53,8 +54,9 @@ export function Navbar() {
     { href: "/about", label: "Tentang" },
   ];
 
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6289501085225";
-  const waClean = waNumber.replace(/[^0-9]/g, "");
+  const { getCustomWhatsAppUrl, loading } = useSettings();
+  const desktopWaUrl = getCustomWhatsAppUrl("Halo PakeLagi, saya ingin bertanya tentang produk preloved.");
+  const mobileWaUrl = getCustomWhatsAppUrl("Halo PakeLagi, saya ingin bertanya seputar produk.");
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-border bg-background/90 backdrop-blur-md transition-colors">
@@ -124,16 +126,29 @@ export function Navbar() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-brand-muted" />
             </form>
 
-            <a
-              href={`https://wa.me/${waClean}?text=${encodeURIComponent("Halo PakeLagi, saya ingin bertanya tentang produk preloved.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-medium px-4 py-2.5 rounded-full transition-all shadow-sm whitespace-nowrap active:scale-95"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>Chat via WhatsApp</span>
-              <ArrowRight className="w-3 h-3" />
-            </a>
+            {desktopWaUrl ? (
+              <a
+                href={desktopWaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-medium px-4 py-2.5 rounded-full transition-all shadow-sm whitespace-nowrap active:scale-95"
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span>Chat via WhatsApp</span>
+                <ArrowRight className="w-3 h-3" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title={loading ? "Memuat kontak..." : "Kontak WhatsApp belum tersedia"}
+                className="inline-flex items-center gap-2 bg-brand-muted/30 text-brand-muted text-xs font-medium px-4 py-2.5 rounded-full cursor-not-allowed whitespace-nowrap opacity-60"
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span>Chat via WhatsApp</span>
+                <ArrowRight className="w-3 h-3" />
+              </button>
+            )}
 
             <ThemeToggle />
           </div>
@@ -142,15 +157,27 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:hidden">
             <ThemeToggle />
 
-            <a
-              href={`https://wa.me/${waClean}?text=${encodeURIComponent("Halo PakeLagi, saya ingin bertanya seputar produk.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 bg-brand-primary text-white rounded-full"
-              aria-label="WhatsApp"
-            >
-              <MessageSquare className="w-4 h-4" />
-            </a>
+            {mobileWaUrl ? (
+              <a
+                href={mobileWaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-brand-primary text-white rounded-full"
+                aria-label="WhatsApp"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title={loading ? "Memuat kontak..." : "Kontak WhatsApp belum tersedia"}
+                className="p-2 bg-brand-muted/30 text-brand-muted rounded-full cursor-not-allowed opacity-60"
+                aria-label="WhatsApp"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </button>
+            )}
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -214,16 +241,29 @@ export function Navbar() {
             </div>
 
             <div className="px-2 pt-2 border-t border-brand-border">
-              <a
-                href={`https://wa.me/${waClean}?text=${encodeURIComponent("Halo PakeLagi, saya ingin bertanya tentang produk preloved.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-medium py-3 rounded-full w-full transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Chat via WhatsApp</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+              {desktopWaUrl ? (
+                <a
+                  href={desktopWaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white text-sm font-medium py-3 rounded-full w-full transition-colors"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Chat via WhatsApp</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  title={loading ? "Memuat kontak..." : "Kontak WhatsApp belum tersedia"}
+                  className="flex items-center justify-center gap-2 bg-brand-muted/30 text-brand-muted text-sm font-medium py-3 rounded-full w-full cursor-not-allowed opacity-60"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Chat via WhatsApp</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         )}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCategories, getProducts } from "@/services/product-service";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { HeroProductCarousel } from "@/components/product/HeroProductCarousel";
+import { HeroWhatsAppButton } from "@/components/home/HeroWhatsAppButton";
 import { ArrowRight, MessageSquare, ShieldCheck, Shirt } from "lucide-react";
 import { Suspense } from "react";
 import { ProductGridSkeleton } from "@/components/ui/Skeleton";
@@ -42,8 +43,6 @@ export default async function HomePage() {
   const heroProducts = await getProducts({ per_page: 5, sort: "newest" })
     .then((res) => res.data)
     .catch(() => []);
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6289501085225";
-  const waClean = waNumber.replace(/[^0-9]/g, "");
 
   return (
     <div className="flex flex-col gap-16 pb-20 bg-background">
@@ -91,16 +90,7 @@ export default async function HomePage() {
 
               {/* Action Buttons Spec */}
               <div className="flex flex-wrap items-center gap-4 pt-4 w-full sm:w-auto">
-                <a
-                  href={`https://wa.me/${waClean}?text=${encodeURIComponent("Halo PakeLagi, saya tertarik dengan koleksi preloved.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brand-primary hover:bg-brand-primary-hover text-white font-medium text-sm px-8 py-4 rounded-full shadow-md transition-all active:scale-95"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Tanya via WhatsApp</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+                <HeroWhatsAppButton />
 
                 <Link
                   href="/products"

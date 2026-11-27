@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { SettingsProvider } from "@/contexts/SettingsContext";
 
 /**
  * Conditionally wraps children with Navbar + Footer for public pages,
@@ -18,7 +19,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    <SettingsProvider>
       <Suspense
         fallback={
           <header className="h-16 w-full bg-background border-b border-brand-border" />
@@ -28,6 +29,6 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       </Suspense>
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer />
-    </>
+    </SettingsProvider>
   );
 }

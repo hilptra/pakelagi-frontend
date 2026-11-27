@@ -4,17 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { PakeLagiLogo } from "@/components/ui/PakeLagiLogo";
+import { useSettings } from "@/contexts/SettingsContext";
 
 export function Footer() {
   const pathname = usePathname();
+  const { getCustomWhatsAppUrl, loading } = useSettings();
+  const footerWaUrl = getCustomWhatsAppUrl("Halo PakeLagi!");
 
   // Hide customer footer on admin routes and login page
   if (pathname.startsWith("/admin") || pathname === "/login") {
     return null;
   }
-
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6289501085225";
-  const waClean = waNumber.replace(/[^0-9]/g, "");
 
   return (
     <footer className="w-full border-t border-brand-border bg-surface text-foreground text-sm mt-auto">
@@ -79,15 +79,27 @@ export function Footer() {
             </a>
 
             {/* WhatsApp */}
-            <a
-              href={`https://wa.me/${waClean}?text=${encodeURIComponent("Halo PakeLagi!")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp PakeLagi"
-              className="p-2.5 rounded-full border border-brand-border text-foreground hover:bg-background hover:text-brand-primary transition-colors"
-            >
-              <MessageSquare className="w-4 h-4" />
-            </a>
+            {footerWaUrl ? (
+              <a
+                href={footerWaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp PakeLagi"
+                className="p-2.5 rounded-full border border-brand-border text-foreground hover:bg-background hover:text-brand-primary transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title={loading ? "Memuat kontak..." : "Kontak WhatsApp belum tersedia"}
+                aria-label="WhatsApp PakeLagi"
+                className="p-2.5 rounded-full border border-brand-border text-brand-muted cursor-not-allowed opacity-60"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </button>
+            )}
           </div>
 
         </div>

@@ -146,7 +146,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
             <div className="flex items-center justify-center gap-1.5 text-xs text-brand-muted pt-1">
               <Truck className="w-4 h-4 text-brand-primary" />
-              <span>Pengiriman: Bisa diambil langsung / COD (nego)</span>
+              <span>Pengiriman: Bisa diambil langsung / COD / Kirim J&T</span>
             </div>
           </div>
 

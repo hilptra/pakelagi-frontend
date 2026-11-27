@@ -1,14 +1,22 @@
 import { ProductDetail, ProductListItem } from "@/types";
 import { formatRupiah, getConditionLabel } from "./utils";
 
-const DEFAULT_WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6289501085225";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pakelagi.com";
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://pakelagi.com").replace(/\/+$/, "");
 
+/**
+ * Membuat tautan WhatsApp untuk produk.
+ * Memprioritaskan nomor seller jika tersedia, kemudian nomor fallback (misal dari setting admin).
+ * Jika tidak ada nomor yang tersedia, mengembalikan null.
+ */
 export function generateWhatsAppLink(
   product: ProductDetail | ProductListItem,
-  sellerPhone: string = DEFAULT_WHATSAPP_NUMBER
-): string {
-  const cleanPhone = sellerPhone.replace(/[^0-9]/g, "");
+  sellerPhone?: string | null
+): string | null {
+  const rawPhone = sellerPhone || (product as { seller_phone?: string }).seller_phone;
+  if (!rawPhone) return null;
+
+  const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
+  if (!cleanPhone) return null;
 
   const text = `Halo PakeLagi, saya tertarik dengan produk ini:
 
