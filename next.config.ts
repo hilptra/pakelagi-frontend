@@ -14,6 +14,7 @@ const BACKEND_ORIGIN = (
 const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
+    formats: ["image/avif", "image/webp"],
     dangerouslyAllowLocalIP: isDev, // true saat dev, otomatis false saat production
     remotePatterns: isDev
       ? [
